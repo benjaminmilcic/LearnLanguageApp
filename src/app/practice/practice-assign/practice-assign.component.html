@@ -1,0 +1,28 @@
+<div class="assign" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center stretch">
+  <mat-card>
+    <mat-card-title>Hrvatski</mat-card-title>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let croatianWord of croatianVocableList"
+          #croatianChip="matChip"
+          (click)="croatianChip.toggleSelected()"
+          (selectionChange)="toggleLeftSelection(croatianChip)">
+          {{croatianWord}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title>Deutsch</mat-card-title>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip
+          *ngFor="let germanWord of germanVocableList"
+          #germanChip="matChip"
+          (click)="germanChip.toggleSelected()"
+          (selectionChange)="toggleRightSelection(germanChip)">{{germanWord}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
+</div>

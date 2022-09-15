@@ -1,0 +1,13 @@
+mat-card {
+    width: 600px;
+    min-height: 300px;
+}
+
+mat-card-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.assign{
+    margin: 20px;
+}

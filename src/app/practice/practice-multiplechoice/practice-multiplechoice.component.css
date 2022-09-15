@@ -1,0 +1,20 @@
+mat-card {
+    width: 600px;
+    min-height: 300px;
+}
+
+.multipleChoice {
+    margin: 20px;
+}
+
+.multipleChoice button {
+    width: 80%;
+}
+
+.right {
+    background-color: green;
+}
+
+.wrong {
+    background-color: red !important;
+}

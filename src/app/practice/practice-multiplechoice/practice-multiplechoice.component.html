@@ -1,0 +1,14 @@
+<div class="multipleChoice" fxLayout="row" fxLayoutAlign="center stretch">
+  <mat-card>
+    <mat-card-title>{{wordToPractice[otherLanguage]}}</mat-card-title>
+    <mat-card-subtitle>translated into {{language}} means:</mat-card-subtitle>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
+
+      <button mat-stroked-button [ngClass]="styleOfButtons[0]" (click)="onButtonClick(0)">{{wordListForButtons[0]}}</button>
+      <button mat-stroked-button [ngClass]="styleOfButtons[1]" (click)="onButtonClick(1)">{{wordListForButtons[1]}}</button>
+      <button mat-stroked-button [ngClass]="styleOfButtons[2]" (click)="onButtonClick(2)">{{wordListForButtons[2]}}</button>
+      <button mat-stroked-button [ngClass]="styleOfButtons[3]" (click)="onButtonClick(3)">{{wordListForButtons[3]}}</button>
+      <button mat-stroked-button [ngClass]="styleOfButtons[4]" (click)="onButtonClick(4)">{{wordListForButtons[4]}}</button>
+    </mat-card-content>
+  </mat-card>
+</div>
