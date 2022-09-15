@@ -18,8 +18,14 @@ export class PracticeMultiplechoiceComponent implements OnInit {
   styleOfButtons: string[] = [];
   defaultButtonStyle = '';
   wordToPractice!: MyVocable;
+  wordToPracticeIndex: number;
   language: 'german' | 'croatian' = "german";
   otherLanguage: 'german' | 'croatian' = "croatian";
+
+  playAudio = new Audio;
+  audioMode: boolean = false;
+
+  allDone = false;
 
   constructor(public vocablelistService: VocablelistService) { }
 
@@ -66,8 +72,8 @@ export class PracticeMultiplechoiceComponent implements OnInit {
   }
 
   private setWordToPractice() {
-    const randomIndex = Math.floor((Math.random() * this.vocableList.length));
-    this.wordToPractice = this.vocableList[randomIndex];
+    this.wordToPracticeIndex = Math.floor((Math.random() * this.vocableList.length));
+    this.wordToPractice = this.vocableList[this.wordToPracticeIndex];
   }
 
   private putWordToPracticeOnOneButton() {
@@ -131,9 +137,38 @@ export class PracticeMultiplechoiceComponent implements OnInit {
   }
 
   private async switchToNextWord() {
-    const wait = new Promise(resolve => setTimeout(resolve, 2000));
+    const wait = new Promise(resolve => setTimeout(resolve, 1500));
     await wait.then(() => {
-      this.createVocableButtons();
+      this.vocableList.splice(this.wordToPracticeIndex, 1);
+      const existWordsToPractice = this.checkIfExistWordsToPractice();
+      if (existWordsToPractice) {
+        this.createVocableButtons();
+      } else {
+        this.allDone = true;
+      }
     });
+  }
+
+  onToggleLanguage() {
+    if (this.language === 'german') {
+      this.language = 'croatian';
+      this.otherLanguage = 'german';
+    } else {
+      this.language = 'german';
+      this.otherLanguage = 'croatian';
+    }
+    this.createVocableButtons();
+  }
+
+  onPlayAudio() {
+    let audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
+    let audioLanguage: string;
+    if (this.otherLanguage === 'german') {
+      audioLanguage = 'DE';
+    } else {
+      audioLanguage = 'HR';
+    }
+    this.playAudio.src = audioPath + audioLanguage + '/' + this.wordToPractice.audio + '.mp3';
+    this.playAudio.play();
   }
 }

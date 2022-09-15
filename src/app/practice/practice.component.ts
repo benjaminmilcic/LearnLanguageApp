@@ -16,7 +16,6 @@ export class PracticeComponent implements OnInit {
 
   ngOnInit() {
     this.vocablelistService.vocableList = this.databaseService.getVocableList(1);
-    this.vocablelistService.vocableList.splice(4, this.vocablelistService.vocableList.length - 4);
   }
 
 }

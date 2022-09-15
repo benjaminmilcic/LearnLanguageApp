@@ -7,14 +7,18 @@ mat-card {
     margin: 20px;
 }
 
-.multipleChoice button {
+mat-card-content button {
     width: 80%;
 }
 
 .right {
-    background-color: green;
+    background-color: lightgreen;
 }
 
 .wrong {
-    background-color: red !important;
+    background-color: lightcoral;
+}
+
+mat-slide-toggle {
+    margin-left: 20px;
 }

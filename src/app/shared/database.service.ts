@@ -51,7 +51,8 @@ export class DatabaseService {
       vocableList.push(
         new MyVocable(
           this.database[chapter].vocables[vocable].croatian,
-          this.database[chapter].vocables[vocable].german
+          this.database[chapter].vocables[vocable].german,
+          this.database[chapter].vocables[vocable].audioNr
         )
       );
     }

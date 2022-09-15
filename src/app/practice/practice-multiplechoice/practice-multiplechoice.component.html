@@ -1,14 +1,35 @@
 <div class="multipleChoice" fxLayout="row" fxLayoutAlign="center stretch">
-  <mat-card>
-    <mat-card-title>{{wordToPractice[otherLanguage]}}</mat-card-title>
-    <mat-card-subtitle>translated into {{language}} means:</mat-card-subtitle>
-    <mat-card-content fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
-
-      <button mat-stroked-button [ngClass]="styleOfButtons[0]" (click)="onButtonClick(0)">{{wordListForButtons[0]}}</button>
-      <button mat-stroked-button [ngClass]="styleOfButtons[1]" (click)="onButtonClick(1)">{{wordListForButtons[1]}}</button>
-      <button mat-stroked-button [ngClass]="styleOfButtons[2]" (click)="onButtonClick(2)">{{wordListForButtons[2]}}</button>
-      <button mat-stroked-button [ngClass]="styleOfButtons[3]" (click)="onButtonClick(3)">{{wordListForButtons[3]}}</button>
-      <button mat-stroked-button [ngClass]="styleOfButtons[4]" (click)="onButtonClick(4)">{{wordListForButtons[4]}}</button>
+  <mat-card *ngIf="allDone">
+    <mat-card-content fxFlex fxLayout="row" fxLayoutAlign="center center">
+      All done!
     </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="!allDone">
+    <mat-card-title *ngIf="!audioMode">{{wordToPractice[otherLanguage]}}</mat-card-title>
+    <mat-card-title *ngIf="audioMode">
+      <button mat-fab (click)="onPlayAudio()">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-subtitle *ngIf="!audioMode">translated into {{language}} means:</mat-card-subtitle>
+    <mat-card-content fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
+      <button mat-stroked-button [ngClass]="styleOfButtons[0]"
+        (click)="onButtonClick(0)">{{wordListForButtons[0]}}</button>
+      <button *ngIf="vocableList.length > 1" mat-stroked-button [ngClass]="styleOfButtons[1]"
+        (click)="onButtonClick(1)">{{wordListForButtons[1]}}</button>
+      <button *ngIf="vocableList.length > 2" mat-stroked-button [ngClass]="styleOfButtons[2]"
+        (click)="onButtonClick(2)">{{wordListForButtons[2]}}</button>
+      <button *ngIf="vocableList.length > 3" mat-stroked-button [ngClass]="styleOfButtons[3]"
+        (click)="onButtonClick(3)">{{wordListForButtons[3]}}</button>
+      <button *ngIf="vocableList.length > 4" mat-stroked-button [ngClass]="styleOfButtons[4]"
+        (click)="onButtonClick(4)">{{wordListForButtons[4]}}</button>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="onToggleLanguage()">Toggle language</button>
+      <mat-slide-toggle (change)="audioMode=!audioMode;">
+        AUDIO MODE
+        <mat-icon>music_note</mat-icon>
+      </mat-slide-toggle>
+    </mat-card-actions>
   </mat-card>
 </div>
