@@ -51,7 +51,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
     return this.vocableList.length > 0 ? true : false;
   }
 
-  private createVocableButtons() {
+  private createVocableButtons(noplay: boolean = true) {
 
     this.deleteWordListForButtons();
     this.setNumberOfButtons();
@@ -60,7 +60,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
     this.putWordToPracticeOnOneButton();
     this.fillOtherButtonsWithRandomWords()
     this.randomizeButtonOrder();
-    if (this.audioMode) {
+    if (this.audioMode && noplay) {
       this.onPlayAudio();
     }
   }
@@ -174,7 +174,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
       this.audioLanguage = 'HR';
       this.sprache = 'Deutsche';
     }
-    this.createVocableButtons();
+    this.createVocableButtons(false);
   }
 
   onPlayAudio() {

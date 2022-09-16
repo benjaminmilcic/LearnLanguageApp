@@ -6,6 +6,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     imports: [
@@ -15,8 +19,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         MatTabsModule,
         MatButtonModule,
         MatIconModule,
-        MatSlideToggleModule
-
+        MatSlideToggleModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
     ],
     exports: [
         MatCardModule,
@@ -25,7 +32,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
         MatTabsModule,
         MatButtonModule,
         MatIconModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
     ]
 })
 export class MaterialModule { }

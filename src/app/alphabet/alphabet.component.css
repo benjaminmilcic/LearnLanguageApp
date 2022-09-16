@@ -1,0 +1,9 @@
+mat-card {
+    width: 600px;
+    min-height: 300px;
+    margin: 20px 0 20px;
+}
+
+mat-chip-list {
+    width: 600px;
+}

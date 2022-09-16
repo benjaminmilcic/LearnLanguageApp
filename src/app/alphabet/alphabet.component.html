@@ -1,0 +1,20 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <mat-card>
+        <mat-card-content>
+            <app-alphabet-youtubeplayer></app-alphabet-youtubeplayer>
+        </mat-card-content>
+    </mat-card>
+    <p>
+        Wähle einen Buchstaben:
+    </p>
+    <mat-chip-list #chipList>
+        <mat-chip
+            *ngFor="let letter of alphabet"
+            class="chips"
+            #letterChip="matChip"
+            (click)="letterChip.select()"
+            (selectionChange)="onSelectLetter(letterChip)">
+            {{letter}}
+        </mat-chip>
+    </mat-chip-list>
+</div>

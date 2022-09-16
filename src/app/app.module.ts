@@ -11,6 +11,11 @@ import { PracticeComponent } from './practice/practice.component';
 import { PracticeAssignComponent } from './practice/practice-assign/practice-assign.component';
 import { PracticeMultiplechoiceComponent } from './practice/practice-multiplechoice/practice-multiplechoice.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { AlphabetComponent } from './alphabet/alphabet.component';
+import { AlphabetYoutubeplayerComponent } from './alphabet/alphabet-youtubeplayer/alphabet-youtubeplayer.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,10 @@ import { CategoriesComponent } from './categories/categories.component';
     PracticeComponent,
     PracticeAssignComponent,
     PracticeMultiplechoiceComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    NavigationComponent,
+    AlphabetComponent,
+    AlphabetYoutubeplayerComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +34,8 @@ import { CategoriesComponent } from './categories/categories.component';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    YouTubePlayerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@ import { DatabaseService } from './shared/database.service';
 })
 export class AppComponent implements OnInit{
 
-  constructor(public databaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
     const vocableList = this.databaseService.fetchData();
