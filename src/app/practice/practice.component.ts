@@ -19,7 +19,9 @@ export class PracticeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(index => {
       this.vocablelistService.vocableList = this.databaseService.getVocableList(index);
-      this.vocablelistService.vocableList.splice(2, this.vocablelistService.vocableList.length - 2);
+
+      // for testing...
+      // this.vocablelistService.vocableList.splice(2, this.vocablelistService.vocableList.length - 2);
     });
   }
 
