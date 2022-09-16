@@ -1,7 +1,7 @@
 <div class="multipleChoice" fxLayout="row" fxLayoutAlign="center stretch">
   <mat-card *ngIf="allDone">
     <mat-card-content fxFlex fxLayout="row" fxLayoutAlign="center center">
-      All done!
+      Alles erledigt!
     </mat-card-content>
   </mat-card>
   <mat-card *ngIf="!allDone">
@@ -11,7 +11,7 @@
         <mat-icon>play_arrow</mat-icon>
       </button>
     </mat-card-title>
-    <mat-card-subtitle *ngIf="!audioMode">translated into {{language}} means:</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="!audioMode">Übersetzt ins {{sprache}} bedeutet:</mat-card-subtitle>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
       <button  *ngIf="vocableList.length >= 1" mat-stroked-button [ngClass]="styleOfButtons[0]"
         (click)="onButtonClick(0)">{{wordListForButtons[0]}}</button>
@@ -25,9 +25,9 @@
         (click)="onButtonClick(4)">{{wordListForButtons[4]}}</button>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button (click)="onToggleLanguage()">Toggle language</button>
+      <button mat-raised-button (click)="onToggleLanguage()">Sprache wechseln</button>
       <mat-slide-toggle (change)="audioMode=!audioMode;">
-        AUDIO MODE
+        AUDIO MODUS
         <mat-icon>music_note</mat-icon>
       </mat-slide-toggle>
     </mat-card-actions>

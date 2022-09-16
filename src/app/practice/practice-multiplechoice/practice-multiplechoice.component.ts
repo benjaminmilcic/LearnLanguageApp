@@ -22,6 +22,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   wordToPracticeIndex: number;
   language: 'german' | 'croatian' = "german";
   otherLanguage: 'german' | 'croatian' = "croatian";
+  sprache: string = 'Deutsche';
 
   playAudio = new Audio;
   audioMode: boolean = false;
@@ -165,10 +166,12 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
       this.language = 'croatian';
       this.otherLanguage = 'german';
       this.audioLanguage = 'DE';
+      this.sprache = 'Kroatische';
     } else {
       this.language = 'german';
       this.otherLanguage = 'croatian';
       this.audioLanguage = 'HR';
+      this.sprache = 'Deutsche';
     }
     this.createVocableButtons();
   }
