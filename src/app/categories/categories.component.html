@@ -1,0 +1,15 @@
+<div class="category" fxLayout="column" fxLayoutAlign="start center">
+  <p>
+  Choose your category:
+</p>
+<mat-chip-list #chipList>
+  <mat-chip
+    *ngFor="let category of categories; let i=index;"
+    class="chips"
+    #categoryChip="matChip"
+    (click)="categoryChip.select()"
+    (selectionChange)="onSelectCategory(categoryChip,i)">
+    {{category}}
+  </mat-chip>
+</mat-chip-list>
+</div>

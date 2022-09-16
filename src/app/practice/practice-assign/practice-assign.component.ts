@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
+import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
-import { VocablelistService } from '../vocablelist.service';
+import { VocablelistService } from '../../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice-assign',
   templateUrl: './practice-assign.component.html',
   styleUrls: ['./practice-assign.component.css']
 })
-export class PracticeAssignComponent implements OnInit {
+export class PracticeAssignComponent implements OnInit, OnDestroy {
 
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
@@ -16,16 +17,22 @@ export class PracticeAssignComponent implements OnInit {
   leftChip: MatChip = null;
   rightChip: MatChip = null;
 
+  vocableListSubscription: Subscription;
+
   constructor(private vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.vocableList = this.vocablelistService.vocableList;
-    for (let vocable = 0; vocable < this.vocableList.length; vocable++) {
-      this.croatianVocableList.push(this.vocableList[vocable].croatian);
-      this.germanVocableList.push(this.vocableList[vocable].german);
-    }
-    this.croatianVocableList.sort(() => 0.5 - Math.random());
-    this.germanVocableList.sort(() => 0.5 - Math.random());
+    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(() => {
+      this.vocableList = this.vocablelistService.vocableList;
+      this.croatianVocableList = [];
+      this.germanVocableList = [];
+      for (let vocable = 0; vocable < this.vocableList.length; vocable++) {
+        this.croatianVocableList.push(this.vocableList[vocable].croatian);
+        this.germanVocableList.push(this.vocableList[vocable].german);
+      }
+      this.croatianVocableList.sort(() => 0.5 - Math.random());
+      this.germanVocableList.sort(() => 0.5 - Math.random());
+    });
   }
 
   toggleLeftSelection(chip: MatChip) {
@@ -65,5 +72,9 @@ export class PracticeAssignComponent implements OnInit {
         }
       }
     }, 500);
+  }
+
+  ngOnDestroy() {
+    this.vocableListSubscription.unsubscribe();
   }
 }

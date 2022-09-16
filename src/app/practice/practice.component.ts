@@ -1,21 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { MatChip } from '@angular/material/chips';
+import { Component, OnDestroy, OnInit} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { DatabaseService } from '../shared/database.service';
-import { VocablelistService } from './vocablelist.service';
+import { VocablelistService } from '../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice',
   templateUrl: './practice.component.html',
   styleUrls: ['./practice.component.css']
 })
-export class PracticeComponent implements OnInit {
+export class PracticeComponent implements OnInit, OnDestroy {
 
-  constructor(
-    private databaseService: DatabaseService,
-    public vocablelistService: VocablelistService) { }
+  vocableListSubscription: Subscription;
+
+
+  constructor(public databaseService: DatabaseService,
+    private vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.vocablelistService.vocableList = this.databaseService.getVocableList(1);
+    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(index => {
+      this.vocablelistService.vocableList = this.databaseService.getVocableList(index);
+    });
   }
 
+
+  ngOnDestroy() {
+    this.vocableListSubscription.unsubscribe();
+  }
 }

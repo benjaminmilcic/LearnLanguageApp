@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
-import { VocablelistService } from '../vocablelist.service';
+import { VocablelistService } from '../../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice-multiplechoice',
   templateUrl: './practice-multiplechoice.component.html',
   styleUrls: ['./practice-multiplechoice.component.css']
 })
-export class PracticeMultiplechoiceComponent implements OnInit {
+export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
 
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
   germanVocableList: string[] = [];
 
   wordListForButtons: string[] = [];
-  numberOfButtons = 5;
+  numberOfButtons: number;
   styleOfButtons: string[] = [];
   defaultButtonStyle = '';
   wordToPractice!: MyVocable;
@@ -24,18 +25,24 @@ export class PracticeMultiplechoiceComponent implements OnInit {
 
   playAudio = new Audio;
   audioMode: boolean = false;
+  audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
+  audioLanguage: string = 'HR';
 
-  allDone = false;
+  allDone: boolean;
+
+  vocableListSubscription: Subscription;
 
   constructor(public vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-
-    this.vocableList = this.vocablelistService.vocableList;
-    const existWordsToPractice = this.checkIfExistWordsToPractice();
-    if (existWordsToPractice) {
-      this.createVocableButtons();
-    }
+    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(() => {
+      this.allDone = false;
+      this.vocableList = this.vocablelistService.vocableList;
+      const existWordsToPractice = this.checkIfExistWordsToPractice();
+      if (existWordsToPractice) {
+        this.createVocableButtons();
+      }
+    });
   }
 
   private checkIfExistWordsToPractice() {
@@ -51,6 +58,9 @@ export class PracticeMultiplechoiceComponent implements OnInit {
     this.putWordToPracticeOnOneButton();
     this.fillOtherButtonsWithRandomWords()
     this.randomizeButtonOrder();
+    if (this.audioMode) {
+      this.onPlayAudio();
+    }
   }
 
   private deleteWordListForButtons() {
@@ -58,6 +68,7 @@ export class PracticeMultiplechoiceComponent implements OnInit {
   }
 
   private setNumberOfButtons() {
+    this.numberOfButtons = 5;
     const lessVocablesToPracticeThanButtons: boolean = this.vocableList.length < this.numberOfButtons;
     if (lessVocablesToPracticeThanButtons) {
       this.numberOfButtons = this.vocableList.length;
@@ -153,22 +164,21 @@ export class PracticeMultiplechoiceComponent implements OnInit {
     if (this.language === 'german') {
       this.language = 'croatian';
       this.otherLanguage = 'german';
+      this.audioLanguage = 'DE';
     } else {
       this.language = 'german';
       this.otherLanguage = 'croatian';
+      this.audioLanguage = 'HR';
     }
     this.createVocableButtons();
   }
 
   onPlayAudio() {
-    let audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
-    let audioLanguage: string;
-    if (this.otherLanguage === 'german') {
-      audioLanguage = 'DE';
-    } else {
-      audioLanguage = 'HR';
-    }
-    this.playAudio.src = audioPath + audioLanguage + '/' + this.wordToPractice.audio + '.mp3';
+    this.playAudio.src = this.audioPath + this.audioLanguage + '/' + this.wordToPractice.audio + '.mp3';
     this.playAudio.play();
+  }
+
+  ngOnDestroy() {
+    this.vocableListSubscription.unsubscribe();
   }
 }

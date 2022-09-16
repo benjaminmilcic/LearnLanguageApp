@@ -13,7 +13,7 @@
     </mat-card-title>
     <mat-card-subtitle *ngIf="!audioMode">translated into {{language}} means:</mat-card-subtitle>
     <mat-card-content fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
-      <button mat-stroked-button [ngClass]="styleOfButtons[0]"
+      <button  *ngIf="vocableList.length >= 1" mat-stroked-button [ngClass]="styleOfButtons[0]"
         (click)="onButtonClick(0)">{{wordListForButtons[0]}}</button>
       <button *ngIf="vocableList.length > 1" mat-stroked-button [ngClass]="styleOfButtons[1]"
         (click)="onButtonClick(1)">{{wordListForButtons[1]}}</button>

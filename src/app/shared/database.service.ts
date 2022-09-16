@@ -58,4 +58,12 @@ export class DatabaseService {
     }
     return vocableList;
   }
+
+  getCategoyList() {
+    let categories: string[] = [];
+    for (let chapter = 0; chapter < this.database.length; chapter++) {
+      categories.push(this.database[chapter].german);
+    }
+    return categories;
+  }
 }

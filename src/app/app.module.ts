@@ -10,13 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { PracticeComponent } from './practice/practice.component';
 import { PracticeAssignComponent } from './practice/practice-assign/practice-assign.component';
 import { PracticeMultiplechoiceComponent } from './practice/practice-multiplechoice/practice-multiplechoice.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PracticeComponent,
     PracticeAssignComponent,
-    PracticeMultiplechoiceComponent
+    PracticeMultiplechoiceComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
