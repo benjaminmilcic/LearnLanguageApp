@@ -25,7 +25,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   sprache: string = 'Deutsche';
 
   playAudio = new Audio;
-  audioMode: boolean = false;
+  audioMode: boolean;
   audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
   audioLanguage: string = 'HR';
 
@@ -38,6 +38,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(() => {
       this.allDone = false;
+      this.audioMode = false;
       this.vocableList = this.vocablelistService.vocableList;
       const existWordsToPractice = this.checkIfExistWordsToPractice();
       if (existWordsToPractice) {
