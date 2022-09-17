@@ -1,0 +1,19 @@
+mat-card {
+    width: 600px;
+    min-height: 300px;
+    margin: 20px 0 20px;
+    padding-top: 40px;
+}
+
+mat-card-title {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+mat-card-actions {
+    margin-top: 30px;
+}
+
+.primary {
+    color: #3f51b5;
+}

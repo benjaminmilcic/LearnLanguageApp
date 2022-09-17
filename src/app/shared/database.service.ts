@@ -18,14 +18,25 @@ interface Vocable {
   checked: boolean
 }
 
+export interface Letter {
+  letter: string,
+  spell: string,
+  germanExample: string,
+  example: string,
+  audioPath: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
   private database: Chapter[] = [];
+  private alphabet: Letter[] = [];
 
-  databaseLoaded = false;
+  private alphabetLoaded = false;
+  private databaseLoaded = false;
+  allLoaded = false;
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +49,21 @@ export class DatabaseService {
       },
       () => {
         this.databaseLoaded = true;
+        if (this.databaseLoaded && this.alphabetLoaded) {
+          this.allLoaded = true;
+        }
+      });
+    this.http.get<Letter[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/alphabet.json').subscribe(data => {
+      this.alphabet = data;
+    },
+      error => {
+        throw new Error(error);
+      },
+      () => {
+        this.alphabetLoaded = true;
+        if (this.databaseLoaded && this.alphabetLoaded) {
+          this.allLoaded = true;
+        }
       });
   }
 
@@ -65,5 +91,9 @@ export class DatabaseService {
       categories.push(this.database[chapter].german);
     }
     return categories;
+  }
+
+  getAlphabet() {
+    return this.alphabet;
   }
 }

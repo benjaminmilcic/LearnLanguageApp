@@ -1,20 +1,13 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-    <mat-card>
-        <mat-card-content>
-            <app-alphabet-youtubeplayer></app-alphabet-youtubeplayer>
-        </mat-card-content>
-    </mat-card>
-    <p>
-        Wähle einen Buchstaben:
-    </p>
-    <mat-chip-list #chipList>
-        <mat-chip
-            *ngFor="let letter of alphabet"
-            class="chips"
-            #letterChip="matChip"
-            (click)="letterChip.select()"
-            (selectionChange)="onSelectLetter(letterChip)">
-            {{letter}}
-        </mat-chip>
-    </mat-chip-list>
-</div>
+<mat-tab-group animationDuration="2000ms">
+    <mat-tab label="Video">
+        <ng-template matTabContent>
+            <app-alphabet-video></app-alphabet-video>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Audio">
+        <ng-template matTabContent>
+            <app-alphabet-audio></app-alphabet-audio>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+<app-alphabet-categories></app-alphabet-categories>

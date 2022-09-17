@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
-import { VocablelistService } from '../shared/vocablelist.service';
-import { DatabaseService } from '../shared/database.service';
+import { VocablelistService } from '../../shared/vocablelist.service';
+import { DatabaseService } from '../../shared/database.service';
 
 @Component({
-  selector: 'app-categories',
-  templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css']
+  selector: 'app-practice-categories',
+  templateUrl: './practice-categories.component.html',
+  styleUrls: ['./practice-categories.component.css']
 })
-export class CategoriesComponent implements OnInit, AfterViewInit {
+export class PracticeCategoriesComponent implements OnInit, AfterViewInit {
 
   categories: string[] = [];
   @ViewChild('chipList') chipList: MatChipList;
@@ -19,8 +19,8 @@ export class CategoriesComponent implements OnInit, AfterViewInit {
     this.categories = this.databaseService.getCategoyList();
   }
 
-  ngAfterViewInit(){
-    this.chipList.chips.first.select();     
+  ngAfterViewInit() {
+    this.chipList.chips.first.select();
   }
 
   onSelectCategory(chip: MatChip, categoryIndex: number) {

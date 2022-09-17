@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <p>
+    Wähle einen Buchstaben:
+  </p>
+  <mat-chip-list #chipList>
+    <mat-chip
+      *ngFor="let letter of alphabet;let i=index;"
+      class="chips"
+      #letterChip="matChip"
+      (click)="onSelectLetter(letterChip,i)"
+      (selectionChange)="onSelectionChange($event)">
+      {{letter}}
+    </mat-chip>
+  </mat-chip-list>
+</div>

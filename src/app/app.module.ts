@@ -10,11 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { PracticeComponent } from './practice/practice.component';
 import { PracticeAssignComponent } from './practice/practice-assign/practice-assign.component';
 import { PracticeMultiplechoiceComponent } from './practice/practice-multiplechoice/practice-multiplechoice.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { PracticeCategoriesComponent } from './practice/practice-categories/practice-categories.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { AlphabetComponent } from './alphabet/alphabet.component';
-import { AlphabetYoutubeplayerComponent } from './alphabet/alphabet-youtubeplayer/alphabet-youtubeplayer.component';
+import { AlphabetYoutubeplayerComponent } from './alphabet/alphabet-video/alphabet-youtubeplayer/alphabet-youtubeplayer.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
+import { AlphabetVideoComponent } from './alphabet/alphabet-video/alphabet-video.component';
+import { AlphabetCategoriesComponent } from './alphabet/alphabet-categories/alphabet-categories.component';
+import { AlphabetAudioComponent } from './alphabet/alphabet-audio/alphabet-audio.component';
 
 
 @NgModule({
@@ -23,10 +26,13 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     PracticeComponent,
     PracticeAssignComponent,
     PracticeMultiplechoiceComponent,
-    CategoriesComponent,
+    PracticeCategoriesComponent,
     NavigationComponent,
     AlphabetComponent,
-    AlphabetYoutubeplayerComponent
+    AlphabetYoutubeplayerComponent,
+    AlphabetVideoComponent,
+    AlphabetCategoriesComponent,
+    AlphabetAudioComponent
   ],
   imports: [
     BrowserModule,
