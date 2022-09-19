@@ -1,0 +1,26 @@
+mat-card {
+    width: 600px;
+    min-height: 300px;
+    margin: 20px 0 20px;
+}
+
+mat-card-title {
+    text-align: center;
+}
+
+button {
+    margin-left: 30px;
+}
+
+mat-card-content {
+    white-space: pre-wrap;
+}
+
+mat-card-actions {
+    height: 100%;
+}
+
+input {
+    width: 20px;
+    padding-top: 17px;
+}

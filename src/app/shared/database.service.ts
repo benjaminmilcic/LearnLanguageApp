@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MyVocable } from './vocable.model';
+import { tap } from 'rxjs';
 
 interface Chapter {
   german: string,
@@ -26,6 +27,23 @@ export interface Letter {
   audioPath: string
 }
 
+interface Declination {
+  nominativSingular?: string,
+  genitivSingular?: string,
+  dativSingular?: string,
+  akkusativSingular?: string,
+  lokativSingular?: string,
+  vokativSingular?: string,
+  instrumentalSingular?: string,
+  nominativPlural?: string,
+  genitivPlural?: string,
+  dativPlural?: string,
+  akkusativPlural?: string,
+  lokativPlural?: string,
+  vokativPlural?: string,
+  instrumentalPlural?: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +51,13 @@ export class DatabaseService {
 
   private database: Chapter[] = [];
   private alphabet: Letter[] = [];
+  private declination: Declination[] = [];
+  private searchList: string[] = [];
 
   private alphabetLoaded = false;
   private databaseLoaded = false;
+  private declinationLoaded = false;
+
   allLoaded = false;
 
   constructor(private http: HttpClient) { }
@@ -49,10 +71,11 @@ export class DatabaseService {
       },
       () => {
         this.databaseLoaded = true;
-        if (this.databaseLoaded && this.alphabetLoaded) {
+        if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
           this.allLoaded = true;
         }
       });
+
     this.http.get<Letter[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/alphabet.json').subscribe(data => {
       this.alphabet = data;
     },
@@ -61,7 +84,24 @@ export class DatabaseService {
       },
       () => {
         this.alphabetLoaded = true;
-        if (this.databaseLoaded && this.alphabetLoaded) {
+        if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
+          this.allLoaded = true;
+        }
+      });
+
+    this.http.get<Declination[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/declination_hr_de.json')
+      .pipe(tap(data => {
+        this.searchList = data.map(word => word.nominativSingular);
+      }))
+      .subscribe(data => {
+        this.declination = data;
+    },
+      error => {
+        throw new Error(error);
+      },
+      () => {
+        this.declinationLoaded = true;
+        if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
           this.allLoaded = true;
         }
       });
@@ -95,5 +135,9 @@ export class DatabaseService {
 
   getAlphabet() {
     return this.alphabet;
+  }
+
+  getSearchList() {
+    return this.searchList;
   }
 }

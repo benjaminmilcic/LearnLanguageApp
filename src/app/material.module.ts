@@ -10,6 +10,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import { MatListModule } from '@angular/material/list';
         LayoutModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatAutocompleteModule,
+        MatInputModule
     ],
     exports: [
         MatCardModule,
@@ -36,7 +40,9 @@ import { MatListModule } from '@angular/material/list';
         LayoutModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatAutocompleteModule,
+        MatInputModule
     ]
 })
 export class MaterialModule { }

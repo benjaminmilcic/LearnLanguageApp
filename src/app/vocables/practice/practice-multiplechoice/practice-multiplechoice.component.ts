@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
-import { VocablelistService } from '../../shared/vocablelist.service';
+import { VocablelistService } from '../../../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice-multiplechoice',
@@ -9,6 +9,8 @@ import { VocablelistService } from '../../shared/vocablelist.service';
   styleUrls: ['./practice-multiplechoice.component.css']
 })
 export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
+
+  @ViewChild('buttons') buttons: ElementRef;
 
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
@@ -20,6 +22,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   defaultButtonStyle = '';
   wordToPractice!: MyVocable;
   wordToPracticeIndex: number;
+  wrongAnswered: boolean;
   language: 'german' | 'croatian' = "german";
   otherLanguage: 'german' | 'croatian' = "croatian";
   sprache: string = 'Deutsche';
@@ -51,7 +54,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
     return this.vocableList.length > 0 ? true : false;
   }
 
-  private createVocableButtons(noplay: boolean = true) {
+  private createVocableButtons(play: boolean = true) {
 
     this.deleteWordListForButtons();
     this.setNumberOfButtons();
@@ -60,8 +63,9 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
     this.putWordToPracticeOnOneButton();
     this.fillOtherButtonsWithRandomWords()
     this.randomizeButtonOrder();
-    if (this.audioMode && noplay) {
-      this.onPlayAudio();
+    this.setWrongAnsweredToFalse();
+    if (play) {
+      this.playIfAudioMode();
     }
   }
 
@@ -135,6 +139,16 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
     this.wordListForButtons.sort(() => 0.5 - Math.random());
   }
 
+  private setWrongAnsweredToFalse() {
+    this.wrongAnswered = false;
+  }
+
+  private playIfAudioMode() {
+    if (this.audioMode) {
+      this.onPlayAudio();
+    }
+  }
+
   onButtonClick(buttonNr: number) {
     const isRightAnswer: boolean = this.wordToPractice[this.language] === this.wordListForButtons[buttonNr];
     this.setButtonColorAndContinue(buttonNr, isRightAnswer);
@@ -146,13 +160,17 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
       this.switchToNextWord();
     } else {
       this.styleOfButtons[buttonNr] = 'wrong';
+      this.wrongAnswered = true;
     }
   }
 
   private async switchToNextWord() {
     const wait = new Promise(resolve => setTimeout(resolve, 1500));
     await wait.then(() => {
-      this.vocableList.splice(this.wordToPracticeIndex, 1);
+      if (!this.wrongAnswered) {
+        this.wrongAnswered = false;
+        this.vocableList.splice(this.wordToPracticeIndex, 1);
+      }
       const existWordsToPractice = this.checkIfExistWordsToPractice();
       if (existWordsToPractice) {
         this.createVocableButtons();

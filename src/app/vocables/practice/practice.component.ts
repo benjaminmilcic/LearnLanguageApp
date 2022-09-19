@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DatabaseService } from '../shared/database.service';
-import { VocablelistService } from '../shared/vocablelist.service';
+import { DatabaseService } from '../../shared/database.service';
+import { VocablelistService } from '../../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice',

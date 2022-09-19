@@ -2,11 +2,21 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false">
+    [opened]="(isHandset$ | async) === false"
+    (openedChange)="changeFocus()">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/practice" routerLinkActive="active">Übungen</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/alphabet" routerLinkActive="active">Alphabet</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/jokes" routerLinkActive="active">Witze</a>
+      <a mat-list-item (click)="showVocablesSubMenu=!showVocablesSubMenu">
+        Vokabeln
+        <mat-icon *ngIf="!showVocablesSubMenu">chevron_right</mat-icon>
+        <mat-icon *ngIf="showVocablesSubMenu">expand_more</mat-icon>
+      </a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/practice" routerLinkActive="active"
+        *ngIf="showVocablesSubMenu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Übungen</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/declination" routerLinkActive="active"
+        *ngIf="showVocablesSubMenu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deklination</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

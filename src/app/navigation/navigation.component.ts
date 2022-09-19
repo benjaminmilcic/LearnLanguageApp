@@ -12,19 +12,26 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class NavigationComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  showVocablesSubMenu = false;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(
       map(result => result.matches),
-      shareReplay()
+      // shareReplay()
     );
 
   constructor(private breakpointObserver: BreakpointObserver, public databaseService: DatabaseService) { }
 
   closeDrawer(drawer: MatSidenav) {
+    
     this.isHandset$.subscribe(isHandset => {
       if (isHandset) {
         drawer.close()
       }
     })
+  }
+
+  changeFocus() {
+    (document.activeElement as HTMLElement).blur();
   }
 }

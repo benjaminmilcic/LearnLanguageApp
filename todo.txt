@@ -1,0 +1,5 @@
+Insert Vocables
+Search -> declination
+
+MultipleChoice  no Focus on tablet (remove button anfd add it again?)
+                                    (document.activeElement as HTMLElement).blur();  ???

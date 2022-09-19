@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatChip } from '@angular/material/chips';
 import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
-import { VocablelistService } from '../../shared/vocablelist.service';
+import { VocablelistService } from '../../../shared/vocablelist.service';
 
 @Component({
   selector: 'app-practice-assign',

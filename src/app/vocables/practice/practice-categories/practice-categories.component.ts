@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
-import { VocablelistService } from '../../shared/vocablelist.service';
-import { DatabaseService } from '../../shared/database.service';
+import { VocablelistService } from '../../../shared/vocablelist.service';
+import { DatabaseService } from '../../../shared/database.service';
 
 @Component({
   selector: 'app-practice-categories',
