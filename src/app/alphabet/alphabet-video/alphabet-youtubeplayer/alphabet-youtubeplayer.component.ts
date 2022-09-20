@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlphabetService } from '../../alphabet.service';
 
@@ -29,6 +29,14 @@ export class AlphabetYoutubeplayerComponent implements OnInit, OnDestroy {
   videoId: string;
 
   selectedLetterSubscription: Subscription;
+
+  @HostListener('window:resize')
+  onResize() {
+    if (window.screen.width < 600) {
+      this.playerWidth = window.screen.width - 40;
+      this.playerHeight = this.playerWidth / 1.77777777778;
+    }
+  }
 
   constructor(private alphabetService: AlphabetService) { }
 

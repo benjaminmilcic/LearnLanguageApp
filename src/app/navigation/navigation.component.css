@@ -1,4 +1,5 @@
-.sidenav-container, .spinner {
+.sidenav-container,
+.spinner {
   height: 100%;
 }
 
@@ -18,4 +19,10 @@
 
 .active {
   color: #3f51b5;
+}
+
+.titel {
+  font-family: 'Caveat', cursive;
+  font-size: 28px;
+  /* text-shadow: 4px 4px 4px #aaa; */
 }

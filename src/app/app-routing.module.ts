@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlphabetComponent } from './alphabet/alphabet.component';
+import { DownloadsComponent } from './downloads/downloads.component';
+import { HomepageComponent } from './homepage/homepage.component';
 import { JokesComponent } from './jokes/jokes.component';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { DeclinationComponent } from './vocables/declination/declination.component';
 import { PracticeComponent } from './vocables/practice/practice.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/practice', pathMatch: 'full' },
+  { path: '', component: HomepageComponent, pathMatch: 'full', },
   { path: 'practice', component: PracticeComponent },
   { path: 'alphabet', component: AlphabetComponent },
   { path: 'jokes', component: JokesComponent },
   { path: 'declination', component: DeclinationComponent },
+  { path: 'downloads', component: DownloadsComponent },
   { path: '**', component: PageNotFoundComponent }];
 
 @NgModule({

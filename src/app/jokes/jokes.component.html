@@ -1,16 +1,22 @@
-<div fxLayout="row" fxLayoutAlign="center stretch">
+<div class="jokes" fxLayout="row" fxLayoutAlign="center stretch">
   <mat-card fxLayout="column">
     <mat-card-subtitle>{{language}}</mat-card-subtitle>
     <mat-card-content>{{joke[language]}}</mat-card-content>
-    <mat-card-actions fxFlex fxLayout="row" fxLayoutAlign="start end">
-      <button mat-raised-button (click)="onToggleLanguage()">SPRACHE WECHSELN</button>
-      <button mat-raised-button (click)="onChangeJoke()">ZUFÄLLIGER WITZ</button>
-      <button mat-button (click)="onPreviousJoke()">
-        <mat-icon>arrow_left</mat-icon>
-      </button>
-      <button mat-button (click)="onNextJoke()">
-        <mat-icon>arrow_right</mat-icon>
-      </button>
+    <mat-card-actions fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start end" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start">
+      <div>
+        <button mat-raised-button (click)="onToggleLanguage()">SPRACHE WECHSELN</button>
+        <button style="margin-top: 20px;" mat-raised-button (click)="onChangeJoke()">ZUFÄLLIGER WITZ</button>
+      </div>
+
+      <div fxFlexAlign.lt-sm="center">
+        <button mat-button (click)="onPreviousJoke()">
+          <mat-icon>arrow_left</mat-icon>
+        </button>
+        <button mat-button (click)="onNextJoke()">
+          <mat-icon>arrow_right</mat-icon>
+        </button>
+      </div>
+
     </mat-card-actions>
     <mat-card-footer fxFlexAlign="center">Witz {{jokeID}} / {{allJokes.length}} </mat-card-footer>
   </mat-card>

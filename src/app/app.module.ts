@@ -23,10 +23,12 @@ import { AlphabetAudioComponent } from './alphabet/alphabet-audio/alphabet-audio
 import { JokesComponent } from './jokes/jokes.component';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { DeclinationComponent } from './vocables/declination/declination.component';
+import { DownloadsComponent } from './downloads/downloads.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     PracticeComponent,
     PracticeAssignComponent,
@@ -41,8 +43,9 @@ import { DeclinationComponent } from './vocables/declination/declination.compone
     JokesComponent,
     PageNotFoundComponent,
     DeclinationComponent,
-    
-   ],
+    DownloadsComponent,
+    HomepageComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

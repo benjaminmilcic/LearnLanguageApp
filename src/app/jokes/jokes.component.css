@@ -4,16 +4,17 @@ mat-card {
     margin: 20px 0 20px;
 }
 
+.jokes {
+    margin: 20px;
+}
+
 mat-card-title {
     text-align: center;
 }
 
-button {
-    margin-left: 30px;
-}
-
 mat-card-content {
     white-space: pre-wrap;
+    margin-bottom: 50px;
 }
 
 mat-card-actions {

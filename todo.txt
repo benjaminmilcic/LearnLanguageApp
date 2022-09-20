@@ -1,5 +1,12 @@
 Insert Vocables
 Search -> declination
+            6 faelle
+            id
+            uebersetzung
+
 
 MultipleChoice  no Focus on tablet (remove button anfd add it again?)
                                     (document.activeElement as HTMLElement).blur();  ???
+
+
+this.grammarService.searchList.includes(wordToSearch)

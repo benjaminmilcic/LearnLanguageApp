@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { MyVocable } from './vocable.model';
 import { tap } from 'rxjs';
 
-interface Chapter {
+export interface Chapter {
   german: string,
   croatian: string,
   chapterNr: string,
@@ -27,7 +27,7 @@ export interface Letter {
   audioPath: string
 }
 
-interface Declination {
+export interface Declination {
   nominativSingular?: string,
   genitivSingular?: string,
   dativSingular?: string,
@@ -51,7 +51,7 @@ export class DatabaseService {
 
   private database: Chapter[] = [];
   private alphabet: Letter[] = [];
-  private declination: Declination[] = [];
+  private declinationList: Declination[] = [];
   private searchList: string[] = [];
 
   private alphabetLoaded = false;
@@ -90,21 +90,36 @@ export class DatabaseService {
       });
 
     this.http.get<Declination[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/declination_hr_de.json')
-      .pipe(tap(data => {
-        this.searchList = data.map(word => word.nominativSingular);
-      }))
       .subscribe(data => {
-        this.declination = data;
+        this.declinationList = data;
+        this.declinationList = this.declinationList.filter((element) => {
+          let noSingular = element.nominativSingular==='/';
+          return (!noSingular);
+        });
+        this.declinationList = this.declinationList.filter((element) => {
+          let noSingular = element.nominativSingular === '';
+          return (!noSingular);
+        });
+        this.declinationList = this.declinationList.filter((element) => {
+          let noPlural = element.nominativPlural.length < 4;
+          return (!noPlural);
+        });
+        
     },
       error => {
         throw new Error(error);
       },
-      () => {
+        () => {
+          this.searchList = this.declinationList.map(word => word.nominativSingular);
         this.declinationLoaded = true;
         if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
           this.allLoaded = true;
         }
       });
+  }
+
+  getDatabase() {
+    return this.database;
   }
 
   getVocableList(chapter: number) {
@@ -139,5 +154,9 @@ export class DatabaseService {
 
   getSearchList() {
     return this.searchList;
+  }
+
+  getDeclinationList() {
+    return this.declinationList;
   }
 }

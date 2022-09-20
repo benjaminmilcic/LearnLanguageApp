@@ -1,29 +1,67 @@
-<div class="declination" fxLayout="column" fxLayoutAlign="stretch center">
-  
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Number</mat-label>
-    <input type="text"
-      placeholder="Pick one"
-      aria-label="Number"
+<div class="declination" fxLayout="column" fxLayout.lt-sm="row wrap" fxLayoutAlign="stretch center">
+  <mat-form-field appearance="outline">
+    <mat-label>Suche</mat-label>
+    <input type="search"
+      placeholder="Wähle ein Wort"
       matInput
-      [formControl]="myControl"
+      [formControl]="searchField"
       [matAutocomplete]="auto">
+    <mat-icon matPrefix>search</mat-icon>
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="onSubmit(option)">
         {{option}}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-</form>
-  <mat-card>
-    <mat-card-title></mat-card-title>
-    <mat-card-subtitle></mat-card-subtitle>
+  <mat-card fxLayout="column" fxLayoutAlign="start streched">
+    <mat-card-title fxFlexAlign="center">{{declination.nominativSingular}}</mat-card-title>
     <mat-card-content>
-
+      <table>
+        <thead>
+          <tr>
+            <th class="cases"></th>
+            <th class="cases">Singular</th>
+            <th class="cases">Plural</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Nominativ</th>
+            <td>{{declination.nominativSingular}}</td>
+            <td>{{declination.nominativPlural}}</td>
+          </tr>
+          <tr>
+            <th>Genitiv</th>
+            <td>{{declination.genitivSingular}}</td>
+            <td>{{declination.genitivPlural}}</td>
+          </tr>
+          <tr>
+            <th>Dativ</th>
+            <td>{{declination.dativSingular}}</td>
+            <td>{{declination.dativPlural}}</td>
+          </tr>
+          <tr>
+            <th>Akkusativ</th>
+            <td>{{declination.akkusativSingular}}</td>
+            <td>{{declination.akkusativPlural}}</td>
+          </tr>
+          <tr *ngIf="isCroatian">
+            <th>Lokativ</th>
+            <td>{{declination.lokativSingular}}</td>
+            <td>{{declination.lokativPlural}}</td>
+          </tr>
+          <tr *ngIf="isCroatian">
+            <th>Vokativ</th>
+            <td>{{declination.vokativSingular}}</td>
+            <td>{{declination.vokativPlural}}</td>
+          </tr>
+          <tr *ngIf="isCroatian">
+            <th>Instrumental</th>
+            <td>{{declination.instrumentalSingular}}</td>
+            <td>{{declination.instrumentalPlural}}</td>
+          </tr>
+        </tbody>
+      </table>
     </mat-card-content>
-    <mat-card-actions>
-        <mat-icon>play_arrow</mat-icon>
-    </mat-card-actions>
   </mat-card>
 </div>

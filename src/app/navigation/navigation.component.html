@@ -4,19 +4,48 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
     (openedChange)="changeFocus()">
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar fxLayout="row">
+      <span *ngIf="isHandset$ | async" fxFlex="1 1 auto">Menu</span>
+      <button mat-icon-button *ngIf="isHandset$ | async" (click)="closeDrawer(drawer)">
+        <mat-icon>close</mat-icon>
+      </button>
+      
+    </mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/alphabet" routerLinkActive="active">Alphabet</a>
-      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/jokes" routerLinkActive="active">Witze</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]= "{ exact: true }">
+        <mat-icon>home</mat-icon>
+        &nbsp;&nbsp;Homepage
+      </a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/alphabet" routerLinkActive="active">
+        <mat-icon>abc</mat-icon>
+        &nbsp;&nbsp;Alphabet
+      </a>
       <a mat-list-item (click)="showVocablesSubMenu=!showVocablesSubMenu">
-        Vokabeln
+        <mat-icon>menu_book</mat-icon>
+        &nbsp;&nbsp;Vokabeln
         <mat-icon *ngIf="!showVocablesSubMenu">chevron_right</mat-icon>
         <mat-icon *ngIf="showVocablesSubMenu">expand_more</mat-icon>
       </a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/practice" routerLinkActive="active"
-        *ngIf="showVocablesSubMenu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Übungen</a>
+        *ngIf="showVocablesSubMenu">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-icon>school</mat-icon>
+        &nbsp;&nbsp;Übungen
+      </a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/declination" routerLinkActive="active"
-        *ngIf="showVocablesSubMenu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Deklination</a>
+        *ngIf="showVocablesSubMenu">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-icon>list</mat-icon>
+        &nbsp;&nbsp;Deklination
+      </a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/jokes" routerLinkActive="active">
+        <mat-icon>sentiment_very_satisfied</mat-icon>
+        &nbsp;&nbsp;Witze
+      </a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/downloads" routerLinkActive="active">
+        <mat-icon>file_download</mat-icon>
+        &nbsp;&nbsp;Downloads
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -29,7 +58,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>LearnLanguageApp</span>
+      <span class="titel">Learn Language Application</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <div class="spinner" *ngIf="!databaseService.allLoaded" fxLayout="row" fxLayoutAlign="center center">
