@@ -1,6 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatCard } from '@angular/material/card';
-import { MatChip } from '@angular/material/chips';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import { MatChip} from '@angular/material/chips';
 import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
 import { VocablelistService } from '../../../shared/vocablelist.service';
@@ -10,7 +9,7 @@ import { VocablelistService } from '../../../shared/vocablelist.service';
   templateUrl: './practice-assign.component.html',
   styleUrls: ['./practice-assign.component.css']
 })
-export class PracticeAssignComponent implements OnInit, OnDestroy {
+export class PracticeAssignComponent implements OnInit, OnDestroy{
 
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
@@ -53,6 +52,7 @@ export class PracticeAssignComponent implements OnInit, OnDestroy {
   }
 
   toggleCroatianListSelection(chip: MatChip) {
+    chip.toggleSelected();
     this.croatianChip = chip;
     if (this.germanChip && this.germanChip.selected) {
       this.compareSelections();
@@ -60,6 +60,7 @@ export class PracticeAssignComponent implements OnInit, OnDestroy {
   }
 
   toggleGermanListSelection(chip: MatChip) {
+    chip.toggleSelected();
     this.germanChip = chip;
     if (this.croatianChip && this.croatianChip.selected) {
       this.compareSelections();

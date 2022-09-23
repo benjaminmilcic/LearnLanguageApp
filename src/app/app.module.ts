@@ -27,6 +27,7 @@ import { DownloadsComponent } from './downloads/downloads.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LinksComponent } from './links/links.component';
 import { PracticeOptionsComponent } from './vocables/practice/practice-options/practice-options.component';
+import { StopPropagationDirective } from './shared/stopPropagation.directive';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { PracticeOptionsComponent } from './vocables/practice/practice-options/p
     DownloadsComponent,
     HomepageComponent,
     LinksComponent,
-    PracticeOptionsComponent
+    PracticeOptionsComponent,
+    StopPropagationDirective
   ],
   imports: [
     BrowserModule,

@@ -11,3 +11,7 @@ mat-accordion {
     max-width: 1220px;
     min-height: 300px;
 }
+
+::ng-deep.mat-chip.mat-standard-chip:focus::after {
+    opacity: 0;
+}

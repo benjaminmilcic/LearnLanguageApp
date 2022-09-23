@@ -5,11 +5,10 @@
         <mat-card-title>Kroatisch</mat-card-title>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip
+            <mat-chip stopPropagation="keydown"
               *ngFor="let croatianWord of croatianVocableList"
               #croatianChip="matChip"
-              (click)="croatianChip.toggleSelected()"
-              (selectionChange)="toggleCroatianListSelection(croatianChip)">
+              (click)="toggleCroatianListSelection(croatianChip)">
               {{croatianWord}}
             </mat-chip>
           </mat-chip-list>
@@ -19,11 +18,12 @@
         <mat-card-title>Deutsch</mat-card-title>
         <mat-card-content>
           <mat-chip-list>
-            <mat-chip
+            <mat-chip stopPropagation="keydown"
               *ngFor="let germanWord of germanVocableList"
               #germanChip="matChip"
-              (click)="germanChip.toggleSelected()"
-              (selectionChange)="toggleGermanListSelection(germanChip)">{{germanWord}}</mat-chip>
+              (click)="toggleGermanListSelection(germanChip)">
+              {{germanWord}}
+            </mat-chip>
           </mat-chip-list>
         </mat-card-content>
       </mat-card>

@@ -21,7 +21,7 @@ export class PracticeComponent implements OnInit, OnDestroy {
       this.vocablelistService.fullVocableList = this.databaseService.getVocableList(index);
 
       // this code ist for testing... it reduces the vocableList to 2 Elements
-      // this.vocablelistService.vocableList.splice(2, this.vocablelistService.vocableList.length - 2);
+      // this.vocablelistService.vocableList.splice(4, this.vocablelistService.vocableList.length - 4);
     });
   }
 
