@@ -13,8 +13,17 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <mat-card fxLayout="column" fxLayoutAlign="start streched">
-    <mat-card-title fxFlexAlign="center">{{declination.nominativSingular}}</mat-card-title>
+  <mat-card *ngIf="declination.nominativSingular!=''" fxLayout="column" fxLayoutAlign="start streched">
+    <mat-card-title fxFlexAlign="center">
+      {{declination.nominativSingular}}
+      <button mat-mini-fab (click)="onPlayAudio(declination.nominativSingular)">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </mat-card-title>
+    <mat-card-subtitle>
+      Übersetzt auf {{setLanguage(language)}} heißt:
+      <button mat-button color="primary" (click)="onSubmit(translation)">{{translation}}</button>
+    </mat-card-subtitle>
     <mat-card-content>
       <table>
         <thead>
@@ -45,17 +54,17 @@
             <td>{{declination.akkusativSingular}}</td>
             <td>{{declination.akkusativPlural}}</td>
           </tr>
-          <tr *ngIf="isCroatian">
+          <tr *ngIf="language==='croatian'">
             <th>Lokativ</th>
             <td>{{declination.lokativSingular}}</td>
             <td>{{declination.lokativPlural}}</td>
           </tr>
-          <tr *ngIf="isCroatian">
+          <tr *ngIf="language==='croatian'">
             <th>Vokativ</th>
             <td>{{declination.vokativSingular}}</td>
             <td>{{declination.vokativPlural}}</td>
           </tr>
-          <tr *ngIf="isCroatian">
+          <tr *ngIf="language==='croatian'">
             <th>Instrumental</th>
             <td>{{declination.instrumentalSingular}}</td>
             <td>{{declination.instrumentalPlural}}</td>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatChip, MatChipList, MatChipSelectionChange } from '@angular/material/chips';
 import { AlphabetService } from '../alphabet.service';
 

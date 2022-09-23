@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatCard } from '@angular/material/card';
 import { MatChip } from '@angular/material/chips';
 import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
@@ -14,67 +15,95 @@ export class PracticeAssignComponent implements OnInit, OnDestroy {
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
   germanVocableList: string[] = [];
-  leftChip: MatChip = null;
-  rightChip: MatChip = null;
+  croatianChip: MatChip = null;
+  germanChip: MatChip = null;
 
-  vocableListSubscription: Subscription;
+  categorySelectedSubscription: Subscription;
 
   constructor(private vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(() => {
-      this.vocableList = this.vocablelistService.vocableList;
-      this.croatianVocableList = [];
-      this.germanVocableList = [];
-      for (let vocable = 0; vocable < this.vocableList.length; vocable++) {
-        this.croatianVocableList.push(this.vocableList[vocable].croatian);
-        this.germanVocableList.push(this.vocableList[vocable].german);
-      }
-      this.croatianVocableList.sort(() => 0.5 - Math.random());
-      this.germanVocableList.sort(() => 0.5 - Math.random());
+    this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(() => {
+      this.getVocableList();
+      this.emptyChipLists();
+      this.fillChipLists();
+      this.randomizeChipLists();
     });
   }
 
-  toggleLeftSelection(chip: MatChip) {
-    this.leftChip = chip;
-    if (this.rightChip && this.rightChip.selected) {
+  private getVocableList() {
+    this.vocableList = this.vocablelistService.vocableList;
+  }
+
+  private emptyChipLists() {
+    this.croatianVocableList = [];
+    this.germanVocableList = [];
+  }
+
+  private fillChipLists() {
+    for (let vocableIndex = 0; vocableIndex < this.vocableList.length; vocableIndex++) {
+      this.croatianVocableList.push(this.vocableList[vocableIndex].croatian);
+      this.germanVocableList.push(this.vocableList[vocableIndex].german);
+    }
+  }
+
+  private randomizeChipLists() {
+    this.croatianVocableList.sort(() => 0.5 - Math.random());
+    this.germanVocableList.sort(() => 0.5 - Math.random());
+  }
+
+  toggleCroatianListSelection(chip: MatChip) {
+    this.croatianChip = chip;
+    if (this.germanChip && this.germanChip.selected) {
       this.compareSelections();
     }
   }
 
-  toggleRightSelection(chip: MatChip) {
-    this.rightChip = chip;
-    if (this.leftChip && this.leftChip.selected) {
+  toggleGermanListSelection(chip: MatChip) {
+    this.germanChip = chip;
+    if (this.croatianChip && this.croatianChip.selected) {
       this.compareSelections();
     }
   }
 
   private compareSelections() {
     setTimeout(() => {
-      this.leftChip.deselect();
-      this.rightChip.deselect();
-      for (let vocable = 0; vocable < this.vocableList.length; vocable++) {
-        let croatian: string = this.leftChip.value;
-        let german: string = this.rightChip.value;
-        croatian = croatian.trim();
-        german = german.trim();
-        if (
-          this.vocableList[vocable].croatian === croatian &&
-          this.vocableList[vocable].german === german) {
-          this.croatianVocableList.splice(
-            this.croatianVocableList.indexOf(croatian),
-            1);
-          this.germanVocableList.splice(
-            this.germanVocableList.indexOf(german),
-            1);
-          this.vocableList.splice(vocable, 1);
+
+      for (let vocableIndex = 0; vocableIndex < this.vocableList.length; vocableIndex++) {
+        let croatian: string = this.croatianChip.value.trim();
+        let german: string = this.germanChip.value.trim();
+        if (this.wordMatches(vocableIndex, croatian, german)) {
+          this.removeWordsfromLists(vocableIndex, croatian, german);
           break;
         }
       }
+
+      this.deselectCroatianAndGermanChip();
+
     }, 500);
   }
 
+  private wordMatches(vocableIndex: number, croatian: string, german: string) {
+    return this.vocableList[vocableIndex].croatian === croatian &&
+      this.vocableList[vocableIndex].german === german
+  }
+
+  private removeWordsfromLists(vocableIndex: number, croatian: string, german: string) {
+    this.croatianVocableList.splice(
+      this.croatianVocableList.indexOf(croatian),
+      1);
+    this.germanVocableList.splice(
+      this.germanVocableList.indexOf(german),
+      1);
+    this.vocableList.splice(vocableIndex, 1);
+  }
+
+  private deselectCroatianAndGermanChip() {
+    this.croatianChip.deselect();
+    this.germanChip.deselect();
+  }
+
   ngOnDestroy() {
-    this.vocableListSubscription.unsubscribe();
+    this.categorySelectedSubscription.unsubscribe();
   }
 }

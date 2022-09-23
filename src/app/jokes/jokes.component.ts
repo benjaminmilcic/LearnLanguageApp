@@ -13,8 +13,6 @@ export class JokesComponent implements OnInit {
   language = 'kroatisch';
   allJokes = viceviJson;
 
-  constructor() { }
-
   ngOnInit() {
     this.onChangeJoke();
   }

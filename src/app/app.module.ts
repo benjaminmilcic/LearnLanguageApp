@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { PracticeComponent } from './vocables/practice/practice.component';
 import { PracticeAssignComponent } from './vocables/practice/practice-assign/practice-assign.component';
 import { PracticeMultiplechoiceComponent } from './vocables/practice/practice-multiplechoice/practice-multiplechoice.component';
@@ -25,6 +25,8 @@ import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { DeclinationComponent } from './vocables/declination/declination.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LinksComponent } from './links/links.component';
+import { PracticeOptionsComponent } from './vocables/practice/practice-options/practice-options.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     PageNotFoundComponent,
     DeclinationComponent,
     DownloadsComponent,
-    HomepageComponent
+    HomepageComponent,
+    LinksComponent,
+    PracticeOptionsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MaterialModule,
     HttpClientModule,
     YouTubePlayerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

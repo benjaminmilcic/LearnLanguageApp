@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
 import { VocablelistService } from '../../../shared/vocablelist.service';
@@ -23,23 +23,23 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   wordToPractice!: MyVocable;
   wordToPracticeIndex: number;
   wrongAnswered: boolean;
-  language: 'german' | 'croatian' = "german";
-  otherLanguage: 'german' | 'croatian' = "croatian";
-  sprache: string = 'Deutsche';
+  language = "german";
+  otherLanguage = "croatian";
+  sprache = 'Deutsche';
 
   playAudio = new Audio;
   audioMode: boolean;
   audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
-  audioLanguage: string = 'HR';
+  audioLanguage = 'HR';
 
   allDone: boolean;
 
-  vocableListSubscription: Subscription;
+  categorySelectedSubscription: Subscription;
 
   constructor(public vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(() => {
+    this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(() => {
       this.allDone = false;
       this.audioMode = false;
       this.vocableList = this.vocablelistService.vocableList;
@@ -201,6 +201,6 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.vocableListSubscription.unsubscribe();
+    this.categorySelectedSubscription.unsubscribe();
   }
 }

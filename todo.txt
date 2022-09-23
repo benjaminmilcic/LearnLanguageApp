@@ -10,3 +10,7 @@ MultipleChoice  no Focus on tablet (remove button anfd add it again?)
 
 
 this.grammarService.searchList.includes(wordToSearch)
+
+
+Woerter zuordnen Fehler
+optionen

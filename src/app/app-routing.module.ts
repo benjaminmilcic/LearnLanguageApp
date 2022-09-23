@@ -4,6 +4,7 @@ import { AlphabetComponent } from './alphabet/alphabet.component';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { JokesComponent } from './jokes/jokes.component';
+import { LinksComponent } from './links/links.component';
 import { PageNotFoundComponent } from './PageNotFound/PageNotFound.component';
 import { DeclinationComponent } from './vocables/declination/declination.component';
 import { PracticeComponent } from './vocables/practice/practice.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'jokes', component: JokesComponent },
   { path: 'declination', component: DeclinationComponent },
   { path: 'downloads', component: DownloadsComponent },
+  { path: 'links', component: LinksComponent },
   { path: '**', component: PageNotFoundComponent }];
 
 @NgModule({

@@ -1,13 +1,13 @@
-mat-card {
-    max-width: 600px;
-    min-height: 300px;
-}
-
 mat-card-title {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.assign{
+.assign {
     margin: 20px;
+}
+
+mat-accordion {
+    max-width: 1220px;
+    min-height: 300px;
 }

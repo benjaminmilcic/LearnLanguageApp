@@ -1,0 +1,12 @@
+<mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Optionen
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <mat-selection-list #vocables>
+    <mat-list-option *ngFor="let vocable of fullVocableList">
+      {{vocable.croatian}} / {{vocable.german}}
+    </mat-list-option>
+  </mat-selection-list>
+</mat-expansion-panel>

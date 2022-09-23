@@ -10,23 +10,22 @@ import { VocablelistService } from '../../shared/vocablelist.service';
 })
 export class PracticeComponent implements OnInit, OnDestroy {
 
-  vocableListSubscription: Subscription;
-
+  categorySelectedSubscription: Subscription;
 
   constructor(public databaseService: DatabaseService,
     private vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.vocableListSubscription = this.vocablelistService.vocableListSubject.subscribe(index => {
+    this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(index => {
       this.vocablelistService.vocableList = this.databaseService.getVocableList(index);
+      this.vocablelistService.fullVocableList = this.databaseService.getVocableList(index);
 
-      // for testing...
+      // this code ist for testing... it reduces the vocableList to 2 Elements
       // this.vocablelistService.vocableList.splice(2, this.vocablelistService.vocableList.length - 2);
     });
   }
 
-
   ngOnDestroy() {
-    this.vocableListSubscription.unsubscribe();
+    this.categorySelectedSubscription.unsubscribe();
   }
 }

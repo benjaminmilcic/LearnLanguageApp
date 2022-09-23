@@ -3,13 +3,13 @@ mat-card {
     min-height: 300px;
     margin: 20px 0 20px;
     background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-        url(../../assets/file_download.svg);
+        url(../../assets/link.svg);
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
 
-.downloads {
+.links {
     margin: 20px;
 }
 

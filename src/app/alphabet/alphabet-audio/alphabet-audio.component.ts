@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DatabaseService, Letter } from 'src/app/shared/database.service';
 import { AlphabetService } from '../alphabet.service';
@@ -8,7 +8,7 @@ import { AlphabetService } from '../alphabet.service';
   templateUrl: './alphabet-audio.component.html',
   styleUrls: ['./alphabet-audio.component.css']
 })
-export class AlphabetAudioComponent implements OnInit {
+export class AlphabetAudioComponent implements OnInit, OnDestroy {
 
   alphabet: Letter[] = [];
   playAudio = new Audio;
@@ -26,9 +26,13 @@ export class AlphabetAudioComponent implements OnInit {
     })
   }
 
-  onPlayAudio(index: number) {
-    this.playAudio.src = this.audioPath + this.alphabet[index].audioPath;
+  onPlayAudio(letterIndex: number) {
+    this.playAudio.src = this.audioPath + this.alphabet[letterIndex].audioPath;
     this.playAudio.play();
+  }
+
+  ngOnDestroy(){
+    this.selectedLetterSubscription.unsubscribe();
   }
 
 }

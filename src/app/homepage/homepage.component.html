@@ -1,6 +1,35 @@
-<div class="homepage" fxLayout="row" fxLayoutAlign="center stretch">
-  <mat-card fxLayout="column" fxLayoutAlign="none center">
-    <mat-card-title>Willkommen!</mat-card-title>
-    <mat-card-content>Diese Webseite soll meine Fähigkeit demonstrieren, Web Apps mit dem Angular-Framework zu erstellen.</mat-card-content>
+<h1>Angular-Framework Demo App</h1>
+<div class="homepage" fxLayout="row wrap" fxLayoutAlign="space-evenly start">
+  <mat-card fxLayout="column" fxLayoutAlign="space-evenly center" (click)="onClick('alphabet')">
+    <mat-card-title>Alphabet</mat-card-title>
+    <mat-card-content>
+      <mat-icon>
+        abc
+      </mat-icon>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxLayout="column" fxLayoutAlign="space-evenly center" (click)="onClick('practice')">
+    <mat-card-title>Übungen</mat-card-title>
+    <mat-card-content>
+      <mat-icon>
+        school
+      </mat-icon>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxLayout="column" fxLayoutAlign="space-evenly center" (click)="onClick('declination')">
+    <mat-card-title>Deklination</mat-card-title>
+    <mat-card-content>
+      <mat-icon>
+        list
+      </mat-icon>
+    </mat-card-content>
+  </mat-card>
+  <mat-card fxLayout="column" fxLayoutAlign="space-evenly center" (click)="onClick('jokes')">
+    <mat-card-title>Witze</mat-card-title>
+    <mat-card-content>
+      <mat-icon>
+        sentiment_very_satisfied
+      </mat-icon>
+    </mat-card-content>
   </mat-card>
 </div>

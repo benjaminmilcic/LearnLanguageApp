@@ -1,28 +1,33 @@
-<div class="assign" fxLayout.lt-lg="column" fxLayoutGap="20px" fxLayoutAlign.gt-md="center stretch" fxLayoutAlign.lt-lg="stretch center">
-  <mat-card fxFlex.gt-md="1 1 600px">
-    <mat-card-title>Kroatisch</mat-card-title>
-    <mat-card-content>
-      <mat-chip-list>
-        <mat-chip
-          *ngFor="let croatianWord of croatianVocableList"
-          #croatianChip="matChip"
-          (click)="croatianChip.toggleSelected()"
-          (selectionChange)="toggleLeftSelection(croatianChip)">
-          {{croatianWord}}
-        </mat-chip>
-      </mat-chip-list>
-    </mat-card-content>
-  </mat-card>
-  <mat-card fxFlex.gt-md="1 1 600px">
-    <mat-card-title>Deutsch</mat-card-title>
-    <mat-card-content>
-      <mat-chip-list>
-        <mat-chip
-          *ngFor="let germanWord of germanVocableList"
-          #germanChip="matChip"
-          (click)="germanChip.toggleSelected()"
-          (selectionChange)="toggleRightSelection(germanChip)">{{germanWord}}</mat-chip>
-      </mat-chip-list>
-    </mat-card-content>
-  </mat-card>
+<div class="assign" fxLayout="row" fxLayoutAlign="center space-beetween">
+  <mat-accordion multi>
+    <div fxLayout.lt-lg="column" fxLayoutAlign.gt-md="center stretch" fxLayoutAlign.lt-lg="stretch center">
+      <mat-card fxFlex.gt-md="1 1 530px">
+        <mat-card-title>Kroatisch</mat-card-title>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip
+              *ngFor="let croatianWord of croatianVocableList"
+              #croatianChip="matChip"
+              (click)="croatianChip.toggleSelected()"
+              (selectionChange)="toggleCroatianListSelection(croatianChip)">
+              {{croatianWord}}
+            </mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex.gt-md="1 1 530px">
+        <mat-card-title>Deutsch</mat-card-title>
+        <mat-card-content>
+          <mat-chip-list>
+            <mat-chip
+              *ngFor="let germanWord of germanVocableList"
+              #germanChip="matChip"
+              (click)="germanChip.toggleSelected()"
+              (selectionChange)="toggleGermanListSelection(germanChip)">{{germanWord}}</mat-chip>
+          </mat-chip-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- <app-practice-options></app-practice-options> -->
+  </mat-accordion>
 </div>

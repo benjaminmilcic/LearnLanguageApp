@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { MyVocable } from './vocable.model';
-import { tap } from 'rxjs';
 
 export interface Chapter {
   german: string,
@@ -89,33 +88,20 @@ export class DatabaseService {
         }
       });
 
-    this.http.get<Declination[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/declination_hr_de.json')
+    this.http.get<Declination[]>('https://vocabularyinputapp-default-rtdb.europe-west1.firebasedatabase.app/new_declination_hr_de.json')
       .subscribe(data => {
         this.declinationList = data;
-        this.declinationList = this.declinationList.filter((element) => {
-          let noSingular = element.nominativSingular==='/';
-          return (!noSingular);
-        });
-        this.declinationList = this.declinationList.filter((element) => {
-          let noSingular = element.nominativSingular === '';
-          return (!noSingular);
-        });
-        this.declinationList = this.declinationList.filter((element) => {
-          let noPlural = element.nominativPlural.length < 4;
-          return (!noPlural);
-        });
-        
-    },
-      error => {
-        throw new Error(error);
       },
+        error => {
+          throw new Error(error);
+        },
         () => {
           this.searchList = this.declinationList.map(word => word.nominativSingular);
-        this.declinationLoaded = true;
-        if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
-          this.allLoaded = true;
-        }
-      });
+          this.declinationLoaded = true;
+          if (this.databaseLoaded && this.alphabetLoaded && this.declinationLoaded) {
+            this.allLoaded = true;
+          }
+        });
   }
 
   getDatabase() {

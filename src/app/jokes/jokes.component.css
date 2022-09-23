@@ -2,6 +2,13 @@ mat-card {
     width: 600px;
     min-height: 300px;
     margin: 20px 0 20px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/homepage.jpg);
+    background-size: cover;
+    color: white;
+}
+
+mat-card-subtitle {
+    color: #f44336;
 }
 
 .jokes {

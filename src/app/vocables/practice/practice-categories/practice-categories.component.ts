@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatChip, MatChipList } from '@angular/material/chips';
 import { VocablelistService } from '../../../shared/vocablelist.service';
 import { DatabaseService } from '../../../shared/database.service';
@@ -26,8 +26,7 @@ export class PracticeCategoriesComponent implements OnInit, AfterViewInit {
   onSelectCategory(chip: MatChip, categoryIndex: number) {
     if (chip.selected) {
       chip.color = "accent";
-      this.vocablelistService.vocableListSubject.next(categoryIndex);
+      this.vocablelistService.categorySelectedSubject.next(categoryIndex);
     }
   }
-
 }

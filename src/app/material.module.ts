@@ -13,6 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     imports: [
@@ -29,7 +30,8 @@ import { MatTableModule } from '@angular/material/table';
         MatListModule,
         MatAutocompleteModule,
         MatInputModule,
-        MatTableModule
+        MatTableModule,
+        MatExpansionModule
     ],
     exports: [
         MatCardModule,
@@ -45,7 +47,8 @@ import { MatTableModule } from '@angular/material/table';
         MatListModule,
         MatAutocompleteModule,
         MatInputModule,
-        MatTableModule
+        MatTableModule,
+        MatExpansionModule
     ]
 })
 export class MaterialModule { }

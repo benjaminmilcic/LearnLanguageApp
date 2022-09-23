@@ -1,8 +1,3 @@
-mat-card {
-    width: 600px;
-    min-height: 300px;
-}
-
 .multipleChoice {
     margin: 20px;
 }
@@ -25,4 +20,9 @@ mat-slide-toggle {
 
 .wordCounter {
     text-align: center;
+}
+
+mat-accordion {
+    width: 600px;
+    min-height: 300px;
 }

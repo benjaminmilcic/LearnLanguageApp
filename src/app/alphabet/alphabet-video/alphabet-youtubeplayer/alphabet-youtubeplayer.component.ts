@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlphabetService } from '../../alphabet.service';
 
@@ -32,10 +32,7 @@ export class AlphabetYoutubeplayerComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize')
   onResize() {
-    if (window.screen.width < 600) {
-      this.playerWidth = window.screen.width - 40;
-      this.playerHeight = this.playerWidth / 1.77777777778;
-    }
+    this.resizePlayer();
   }
 
   constructor(private alphabetService: AlphabetService) { }
@@ -50,10 +47,7 @@ export class AlphabetYoutubeplayerComponent implements OnInit, OnDestroy {
       this.apiLoaded = true;
     }
 
-    if (window.screen.width < 600) {
-      this.playerWidth = window.screen.width - 40;
-      this.playerHeight = this.playerWidth / 1.77777777778;
-    }
+    this.resizePlayer();
 
     this.selectedLetterSubscription = this.alphabetService.selectedLetterSubject.subscribe(index => {
       this.videoId = this.videoIdList[index];
@@ -62,5 +56,12 @@ export class AlphabetYoutubeplayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.selectedLetterSubscription.unsubscribe();
+  }
+
+  resizePlayer() {
+    if (window.screen.width < 600) {
+      this.playerWidth = window.screen.width - 40;
+      this.playerHeight = this.playerWidth / 1.77777777778;
+    }
   }
 }

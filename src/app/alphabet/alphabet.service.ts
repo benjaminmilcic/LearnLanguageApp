@@ -7,7 +7,5 @@ import { BehaviorSubject } from 'rxjs';
 export class AlphabetService {
 
   selectedLetterSubject = new BehaviorSubject<number>(0);
-
-  constructor() { }
-
+  
 }

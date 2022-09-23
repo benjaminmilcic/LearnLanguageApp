@@ -8,5 +8,6 @@ import { MyVocable } from './vocable.model';
 export class VocablelistService {
 
   vocableList: MyVocable[] = [];
-  vocableListSubject = new BehaviorSubject<number>(0);
+  fullVocableList: MyVocable[] = [];
+  categorySelectedSubject = new BehaviorSubject<number>(0);
 }
