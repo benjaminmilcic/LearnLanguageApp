@@ -14,3 +14,6 @@ this.grammarService.searchList.includes(wordToSearch)
 
 Woerter zuordnen Fehler
 optionen
+
+
+https://mozaikzvuka.com/wp-content/uploads/2021/06/Kad-si-sretan-TAB-MZ.pdf
