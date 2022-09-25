@@ -1,11 +1,26 @@
 <div class="assign" fxLayout="row" fxLayoutAlign="center space-beetween">
   <mat-accordion multi>
     <div fxLayout.lt-lg="column" fxLayoutAlign.gt-md="center stretch" fxLayoutAlign.lt-lg="stretch center">
-      <mat-card fxFlex.gt-md="1 1 530px">
-        <mat-card-title>Kroatisch</mat-card-title>
+      <mat-card *ngIf="vocablelistService.allDone">
+        <mat-card-content fxFlex fxLayout="row" fxLayoutAlign="center center">
+          Alles erledigt!
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngIf="!vocablelistService.allDone" fxFlex.gt-md="1 1 530px">
+        <mat-card-title>
+          Kroatisch
+          <button
+            [disabled]="!showCroatianHint"
+            mat-mini-fab color="primary"
+            (click)="onCroatianHint()"
+            matTooltip="Klicke hier für einen Hinweis">
+            <mat-icon>lightbulb</mat-icon>
+          </button>
+        </mat-card-title>
         <mat-card-content>
-          <mat-chip-list>
-            <mat-chip stopPropagation="keydown"
+          <mat-chip-list #croatianChipList>
+            <mat-chip
+              stopPropagation="keydown"
               *ngFor="let croatianWord of croatianVocableList"
               #croatianChip="matChip"
               (click)="toggleCroatianListSelection(croatianChip)">
@@ -14,11 +29,21 @@
           </mat-chip-list>
         </mat-card-content>
       </mat-card>
-      <mat-card fxFlex.gt-md="1 1 530px">
-        <mat-card-title>Deutsch</mat-card-title>
+      <mat-card *ngIf="!vocablelistService.allDone" fxFlex.gt-md="1 1 530px">
+        <mat-card-title>
+          Deutsch
+          <button
+            [disabled]="!showGermanHint"
+            mat-mini-fab color="primary"
+            (click)="onGermanHint()"
+            matTooltip="Klicke hier für einen Hinweis">
+            <mat-icon>lightbulb</mat-icon>
+          </button>
+        </mat-card-title>
         <mat-card-content>
-          <mat-chip-list>
-            <mat-chip stopPropagation="keydown"
+          <mat-chip-list #germanChipList>
+            <mat-chip
+              stopPropagation="keydown"
               *ngFor="let germanWord of germanVocableList"
               #germanChip="matChip"
               (click)="toggleGermanListSelection(germanChip)">
@@ -28,6 +53,6 @@
         </mat-card-content>
       </mat-card>
     </div>
-    <!-- <app-practice-options></app-practice-options> -->
+    <app-practice-options *ngIf="!vocablelistService.allDone"></app-practice-options>
   </mat-accordion>
 </div>

@@ -1,11 +1,11 @@
 <div class="multipleChoice" fxLayout="row" fxLayoutAlign="center stretch">
   <mat-accordion multi>
-      <mat-card *ngIf="allDone">
+      <mat-card *ngIf="vocablelistService.allDone">
         <mat-card-content fxFlex fxLayout="row" fxLayoutAlign="center center">
           Alles erledigt!
         </mat-card-content>
       </mat-card>
-      <mat-card *ngIf="!allDone">
+      <mat-card *ngIf="!vocablelistService.allDone">
         <mat-card-subtitle class="wordCounter">
           Noch&nbsp;{{vocableList.length}}&nbsp;
           <span *ngIf="vocableList.length > 1">Wörter</span>
@@ -23,35 +23,35 @@
           Übersetzt ins {{sprache}} bedeutet:
         </mat-card-subtitle>
         <mat-card-content #buttons fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="end center">
-          <button
+          <button [disabled]="disabledWhileWaiting"
             *ngIf="vocableList.length >= 1"
             mat-stroked-button
             [ngClass]="styleOfButtons[0]"
             (click)="onButtonClick(0)">
             {{wordListForButtons[0]}}
           </button>
-          <button
+          <button [disabled]="disabledWhileWaiting"
             *ngIf="vocableList.length > 1"
             mat-stroked-button
             [ngClass]="styleOfButtons[1]"
             (click)="onButtonClick(1)">
             {{wordListForButtons[1]}}
           </button>
-          <button
+          <button [disabled]="disabledWhileWaiting"
             *ngIf="vocableList.length > 2"
             mat-stroked-button
             [ngClass]="styleOfButtons[2]"
             (click)="onButtonClick(2)">
             {{wordListForButtons[2]}}
           </button>
-          <button
+          <button [disabled]="disabledWhileWaiting"
             *ngIf="vocableList.length > 3"
             mat-stroked-button
             [ngClass]="styleOfButtons[3]"
             (click)="onButtonClick(3)">
             {{wordListForButtons[3]}}
           </button>
-          <button
+          <button [disabled]="disabledWhileWaiting"
             *ngIf="vocableList.length > 4"
             mat-stroked-button
             [ngClass]="styleOfButtons[4]"
@@ -69,6 +69,6 @@
           </mat-slide-toggle>
         </mat-card-actions>
       </mat-card>
-    <!-- <app-practice-options *ngIf="!allDone"></app-practice-options> -->
+    <app-practice-options *ngIf="!vocablelistService.allDone"></app-practice-options>
   </mat-accordion>
 </div>

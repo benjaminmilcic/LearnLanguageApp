@@ -20,6 +20,8 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   numberOfButtons: number;
   styleOfButtons: string[] = [];
   defaultButtonStyle = '';
+  disabledWhileWaiting = false;
+
   wordToPractice!: MyVocable;
   wordToPracticeIndex: number;
   wrongAnswered: boolean;
@@ -32,22 +34,28 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
   audioLanguage = 'HR';
 
-  allDone: boolean;
-
   categorySelectedSubscription: Subscription;
+  loadVocableListSubscription: Subscription;
 
   constructor(public vocablelistService: VocablelistService) { }
 
   ngOnInit() {
     this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(() => {
-      this.allDone = false;
       this.audioMode = false;
-      this.vocableList = this.vocablelistService.vocableList;
+      this.startMultipleChoice();
+    });
+    this.loadVocableListSubscription = this.vocablelistService.loadVocableListSubject.subscribe((vocableList) => {
+      this.vocablelistService.vocableList = vocableList;
+      this.startMultipleChoice();
+    })
+  }
+
+  private startMultipleChoice() {
+    this.vocableList = this.vocablelistService.vocableList;
       const existWordsToPractice = this.checkIfExistWordsToPractice();
       if (existWordsToPractice) {
         this.createVocableButtons();
       }
-    });
   }
 
   private checkIfExistWordsToPractice() {
@@ -150,6 +158,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   }
 
   onButtonClick(buttonNr: number) {
+    this.disabledWhileWaiting = true;
     const isRightAnswer: boolean = this.wordToPractice[this.language] === this.wordListForButtons[buttonNr];
     this.setButtonColorAndContinue(buttonNr, isRightAnswer);
   }
@@ -159,6 +168,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
       this.styleOfButtons[buttonNr] = 'right';
       this.switchToNextWord();
     } else {
+      this.disabledWhileWaiting = false;
       this.styleOfButtons[buttonNr] = 'wrong';
       this.wrongAnswered = true;
     }
@@ -167,6 +177,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
   private async switchToNextWord() {
     const wait = new Promise(resolve => setTimeout(resolve, 1500));
     await wait.then(() => {
+      this.disabledWhileWaiting = false;
       if (!this.wrongAnswered) {
         this.wrongAnswered = false;
         this.vocableList.splice(this.wordToPracticeIndex, 1);
@@ -175,7 +186,7 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
       if (existWordsToPractice) {
         this.createVocableButtons();
       } else {
-        this.allDone = true;
+        this.vocablelistService.allDone = true;
       }
     });
   }
@@ -202,5 +213,6 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.categorySelectedSubscription.unsubscribe();
+    this.loadVocableListSubscription.unsubscribe();
   }
 }

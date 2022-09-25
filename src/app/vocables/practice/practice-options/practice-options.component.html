@@ -4,9 +4,15 @@
       Optionen
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <mat-selection-list #vocables>
-    <mat-list-option *ngFor="let vocable of fullVocableList">
-      {{vocable.croatian}} / {{vocable.german}}
-    </mat-list-option>
-  </mat-selection-list>
+  <p>Du kannst in jeder Kategorie die aktuelle Vokabelliste speichern und später wieder laden.</p>
+  <p>Kategorie: <span class="primary">{{selectedCategoryName}}</span></p>
+  <div #vocables fxLayoutGap="20px" fxLayout.gt-lg="row" fxLayout.lt-md="column">
+    <button *ngIf="existVocableListToLoad" mat-raised-button color="warn"
+      (click)="onLoadVocableList()">{{loadedVocableList.length}} VOKABLEN
+      LADEN</button>
+    <button mat-raised-button color="warn" (click)="onSaveVocableList()">{{vocableList.length}} VOKABLEN
+      SPEICHERN</button>
+    <!-- *ngIf="vocableList.length!=vocablelistService.fullVocableList.length" -->
+    <button mat-raised-button color="warn" (click)="onResetVocableList()">ZURÜCKSETZEN</button>
+  </div>
 </mat-expansion-panel>

@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, HostListener, OnDestroy, OnInit} from '@angular/core';
-import { MatChip} from '@angular/material/chips';
-import { Subscription } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { MatChip, MatChipList } from '@angular/material/chips';
+import { interval, Subscription } from 'rxjs';
 import { MyVocable } from 'src/app/shared/vocable.model';
 import { VocablelistService } from '../../../shared/vocablelist.service';
 
@@ -9,25 +9,41 @@ import { VocablelistService } from '../../../shared/vocablelist.service';
   templateUrl: './practice-assign.component.html',
   styleUrls: ['./practice-assign.component.css']
 })
-export class PracticeAssignComponent implements OnInit, OnDestroy{
+export class PracticeAssignComponent implements OnInit, OnDestroy {
 
   vocableList: MyVocable[] = [];
   croatianVocableList: string[] = [];
   germanVocableList: string[] = [];
   croatianChip: MatChip = null;
   germanChip: MatChip = null;
+  croatianHint: string;
+  germanHint: string;
+  showCroatianHint: boolean = false;
+  showGermanHint: boolean = false;
+
+  @ViewChild('croatianChipList') croatianChipList: MatChipList;
+  @ViewChild('germanChipList') germanChipList: MatChipList;
 
   categorySelectedSubscription: Subscription;
+  loadVocableListSubscription: Subscription;
 
-  constructor(private vocablelistService: VocablelistService) { }
+  constructor(public vocablelistService: VocablelistService) { }
 
   ngOnInit() {
-    this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(() => {
-      this.getVocableList();
-      this.emptyChipLists();
-      this.fillChipLists();
-      this.randomizeChipLists();
-    });
+    this.loadVocableListSubscription = this.vocablelistService.loadVocableListSubject.subscribe((vocableList) => {
+      this.vocablelistService.vocableList = vocableList;
+      this.startAssign();
+    }),
+      this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(() => {
+        this.startAssign();
+      });
+  }
+
+  startAssign() {
+    this.getVocableList();
+    this.emptyChipLists();
+    this.fillChipLists();
+    this.randomizeChipLists();
   }
 
   private getVocableList() {
@@ -57,14 +73,36 @@ export class PracticeAssignComponent implements OnInit, OnDestroy{
     if (this.germanChip && this.germanChip.selected) {
       this.compareSelections();
     }
+    if (!this.germanChip || !this.germanChip.selected) {
+      this.showGermanHint = true;
+      this.germanHint = this.setGermanHint();
+    }
   }
 
   toggleGermanListSelection(chip: MatChip) {
-    chip.toggleSelected();
+    chip.select();
     this.germanChip = chip;
     if (this.croatianChip && this.croatianChip.selected) {
       this.compareSelections();
     }
+    if (!this.croatianChip || !this.croatianChip.selected) {
+      this.showCroatianHint = true;
+      this.croatianHint = this.setCroatianHint();
+    }
+  }
+
+  private setCroatianHint(): string {
+    const germanWord: string = this.germanChip.value.trim();
+    const index = this.vocableList.map(vocable => vocable.german).indexOf(germanWord);
+    const croatianWord = this.vocableList.map(vocable => vocable.croatian)[index];
+    return croatianWord;
+  }
+
+  private setGermanHint(): string {
+    const croatianWord: string = this.croatianChip.value.trim();
+    const index = this.vocableList.map(vocable => vocable.croatian).indexOf(croatianWord);
+    const germanWord = this.vocableList.map(vocable => vocable.german)[index];
+    return germanWord;
   }
 
   private compareSelections() {
@@ -78,8 +116,10 @@ export class PracticeAssignComponent implements OnInit, OnDestroy{
           break;
         }
       }
-
       this.deselectCroatianAndGermanChip();
+      if (this.croatianVocableList.length === 0) {
+        this.vocablelistService.allDone = true;
+      }
 
     }, 500);
   }
@@ -102,9 +142,32 @@ export class PracticeAssignComponent implements OnInit, OnDestroy{
   private deselectCroatianAndGermanChip() {
     this.croatianChip.deselect();
     this.germanChip.deselect();
+    this.showCroatianHint = false;
+    this.showGermanHint = false;
   }
 
   ngOnDestroy() {
     this.categorySelectedSubscription.unsubscribe();
+    this.loadVocableListSubscription.unsubscribe();
+  }
+
+  onCroatianHint() {
+    const index = this.croatianVocableList.indexOf(this.croatianHint.trim());
+    const rightChip = (this.croatianChipList.chips.get(index)._elementRef.nativeElement as HTMLElement);
+    rightChip.style.backgroundColor = '#f44336';
+    setTimeout(() => {
+      rightChip.style.backgroundColor = '';
+    },
+      1000);
+  }
+
+  onGermanHint() {
+    const index = this.germanVocableList.indexOf(this.germanHint.trim());
+    const rightChip = (this.germanChipList.chips.get(index)._elementRef.nativeElement as HTMLElement);
+    rightChip.style.backgroundColor = '#f44336';
+    setTimeout(() => {
+      rightChip.style.backgroundColor = '';
+    },
+      1000);
   }
 }

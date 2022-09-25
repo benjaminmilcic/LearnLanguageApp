@@ -26,6 +26,8 @@ export class PracticeCategoriesComponent implements OnInit, AfterViewInit {
   onSelectCategory(chip: MatChip, categoryIndex: number) {
     if (chip.selected) {
       chip.color = "accent";
+      console.log(categoryIndex);
+      this.vocablelistService.allDone = false;
       this.vocablelistService.categorySelectedSubject.next(categoryIndex);
     }
   }

@@ -19,8 +19,9 @@ export class PracticeComponent implements OnInit, OnDestroy {
     this.categorySelectedSubscription = this.vocablelistService.categorySelectedSubject.subscribe(index => {
       this.vocablelistService.vocableList = this.databaseService.getVocableList(index);
       this.vocablelistService.fullVocableList = this.databaseService.getVocableList(index);
+      this.vocablelistService.setSelectCategoryIndex(index);
 
-      // this code ist for testing... it reduces the vocableList to 2 Elements
+      // this code ist for testing... it reduces the vocableList to 4 Elements
       // this.vocablelistService.vocableList.splice(4, this.vocablelistService.vocableList.length - 4);
     });
   }
