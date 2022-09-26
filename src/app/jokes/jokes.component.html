@@ -1,8 +1,9 @@
-<div class="jokes" fxLayout="row" fxLayoutAlign="center stretch">
+<div class="jokes" fxLayout="column" fxlayoutGap="20px" fxLayoutAlign="stretch center">
   <mat-card fxLayout="column">
-    <mat-card-subtitle color="warn">{{language}}</mat-card-subtitle>
+    <mat-card-subtitle>{{language}}</mat-card-subtitle>
     <mat-card-content>{{joke[language]}}</mat-card-content>
-    <mat-card-actions fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start end" fxLayout.lt-sm="column" fxLayoutAlign.lt-sm="start start">
+    <mat-card-actions fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start end" fxLayout.lt-sm="column"
+      fxLayoutAlign.lt-sm="start start">
       <div>
         <button mat-raised-button (click)="onToggleLanguage()">SPRACHE WECHSELN</button>
         <button style="margin-top: 20px;" mat-raised-button (click)="onChangeJoke()">ZUFÄLLIGER WITZ</button>
@@ -19,5 +20,20 @@
 
     </mat-card-actions>
     <mat-card-footer fxFlexAlign="center">Witz {{jokeID}} / {{allJokes.length}} </mat-card-footer>
+  </mat-card>
+  <mat-card fxLayout="column">
+    <mat-card-title>
+      Buch
+    </mat-card-title>
+    <img fxFlexAlign="center" src="../../assets/buch.jpg" alt="Vicevi na dva jezika / Witze in zwei Sprachen">
+    <!-- <app-jokes-book fxFlexAlign="center"></app-jokes-book> -->
+    <mat-card-content>
+      Ich habe ein Buch geschrieben: <strong><em>"Vicevi na dva jezika / Witze in zwei Sprachen"</em></strong>. <br>
+      Dort finden Sie mehr Witze. Ich verschicke das Buch von zu Hause, für 10 Euro + Versandkosten. <br> Schreiben Sie
+      mir eine eMail wenn Sie es haben möchten.<br>
+      <mat-card-actions>
+        <a href="mailto: benjamin.milcic@gmail.com">benjamin.milcic@gmail.com</a>
+      </mat-card-actions>
+    </mat-card-content>
   </mat-card>
 </div>

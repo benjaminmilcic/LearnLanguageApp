@@ -1,14 +1,8 @@
 mat-card {
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
     min-height: 300px;
     margin: 20px 0 20px;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(../../assets/homepage.jpg);
-    background-size: cover;
-    color: white;
-}
-
-mat-card-subtitle {
-    color: #f44336;
 }
 
 .jokes {
@@ -17,6 +11,7 @@ mat-card-subtitle {
 
 mat-card-title {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 mat-card-content {
@@ -31,4 +26,8 @@ mat-card-actions {
 input {
     width: 20px;
     padding-top: 17px;
+}
+
+img {
+    margin-bottom: 20px;
 }

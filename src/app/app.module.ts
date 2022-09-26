@@ -28,6 +28,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LinksComponent } from './links/links.component';
 import { PracticeOptionsComponent } from './vocables/practice/practice-options/practice-options.component';
 import { StopPropagationDirective } from './shared/stopPropagation.directive';
+import { JokesBookComponent } from './jokes/jokes-book/jokes-book.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { StopPropagationDirective } from './shared/stopPropagation.directive';
     HomepageComponent,
     LinksComponent,
     PracticeOptionsComponent,
-    StopPropagationDirective
+    StopPropagationDirective,
+    JokesBookComponent
   ],
   imports: [
     BrowserModule,
