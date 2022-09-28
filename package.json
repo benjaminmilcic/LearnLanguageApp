@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@angular/youtube-player": "^14.2.2",
+    "@paypal/paypal-js": "^5.1.1",
+    "creditcardpayments": "^1.0.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

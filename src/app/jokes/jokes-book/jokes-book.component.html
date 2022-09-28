@@ -1,8 +1,23 @@
-<div class="book-perspective">
-  <div class="book-wrap" #bookWrap>
-    <div class="book book-front" #bookFront></div>
-    <div class="book-title"></div>
-    <div class="book book-back" #bookBack>
+<div fxLayout.gt-xs="row" fxLayoutGap.gt-xs="50px" fxLayoutAlign.gt-xs="space-evenly none" fxLayout.lt-sm="column"
+  fxLayoutGap.lt-sm="20px" fxLayoutAlign.lt-sm="start center">
+  <mat-card-content>
+    <div class="book-perspective">
+      <div class="book-wrap" #bookWrap>
+        <div class="book book-front" #bookFront></div>
+        <div class="book-title"></div>
+        <div class="book book-back" #bookBack>
+        </div>
+      </div>
     </div>
+  </mat-card-content>
+  <div class="book-text">
+    <p>Wenn Sie Lust auf mehr Witze haben, können Sie dieses Büchlein bestellen.</p>
+    <mat-card-subtitle>
+      Format: A6
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Seiten: 188
+    </mat-card-subtitle>
+    <div #paypal></div>
   </div>
 </div>
