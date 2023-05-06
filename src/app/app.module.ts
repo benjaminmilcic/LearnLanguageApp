@@ -29,7 +29,7 @@ import { LinksComponent } from './links/links.component';
 import { PracticeOptionsComponent } from './vocables/practice/practice-options/practice-options.component';
 import { StopPropagationDirective } from './shared/stopPropagation.directive';
 import { JokesBookComponent } from './jokes/jokes-book/jokes-book.component';
-
+import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,8 @@ import { JokesBookComponent } from './jokes/jokes-book/jokes-book.component';
     LinksComponent,
     PracticeOptionsComponent,
     StopPropagationDirective,
-    JokesBookComponent
+    JokesBookComponent,
+    DatenschutzComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,9 +64,9 @@ import { JokesBookComponent } from './jokes/jokes-book/jokes-book.component';
     HttpClientModule,
     YouTubePlayerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

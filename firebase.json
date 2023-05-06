@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/learn-language-app",
+    "public": "/dist/learn-language-app",
     "ignore": [
       "firebase.json",
       "**/.*",
