@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "vocabularyinputapp"
-  }
+    "default": "vocabularyinputapp",
+    "Learn Language App": "vocabularyinputapp"
+  },
+  "targets": {},
+  "etags": {}
 }

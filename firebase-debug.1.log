@@ -1,0 +1,39 @@
+[debug] [2023-05-06T13:13:56.083Z] ----------------------------------------------------------------------
+[debug] [2023-05-06T13:13:56.085Z] Command:       /home/benjamin/.nvm/versions/node/v18.10.0/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-05-06T13:13:56.085Z] CLI Version:   11.15.0
+[debug] [2023-05-06T13:13:56.085Z] Platform:      linux
+[debug] [2023-05-06T13:13:56.085Z] Node Version:  v18.10.0
+[debug] [2023-05-06T13:13:56.085Z] Time:          Sat May 06 2023 15:13:56 GMT+0200 (Mitteleuropäische Sommerzeit)
+[debug] [2023-05-06T13:13:56.086Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-06T13:13:56.135Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-06T13:13:56.136Z] > authorizing via signed-in user (benjamin.milcic@gmail.com)
+[debug] [2023-05-06T13:13:56.136Z] [iam] checking project vocabularyinputapp for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-06T13:13:56.137Z] > refreshing access token with scopes: []
+[debug] [2023-05-06T13:13:56.138Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-06T13:13:56.138Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-06T13:14:05.763Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-06T13:14:05.763Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-06T13:14:05.773Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions [none]
+[debug] [2023-05-06T13:14:05.774Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions x-goog-quota-user=projects/vocabularyinputapp
+[debug] [2023-05-06T13:14:05.774Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-06T13:14:10.836Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions 200
+[debug] [2023-05-06T13:14:10.836Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-06T13:14:10.838Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vocabularyinputapp [none]
+[debug] [2023-05-06T13:14:22.749Z] ----------------------------------------------------------------------
+[debug] [2023-05-06T13:14:22.750Z] Command:       /home/benjamin/.nvm/versions/node/v18.10.0/bin/node /usr/local/bin/firebase deploy
+[debug] [2023-05-06T13:14:22.751Z] CLI Version:   11.15.0
+[debug] [2023-05-06T13:14:22.751Z] Platform:      linux
+[debug] [2023-05-06T13:14:22.751Z] Node Version:  v18.10.0
+[debug] [2023-05-06T13:14:22.751Z] Time:          Sat May 06 2023 15:14:22 GMT+0200 (Mitteleuropäische Sommerzeit)
+[debug] [2023-05-06T13:14:22.751Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-06T13:14:22.799Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-06T13:14:22.799Z] > authorizing via signed-in user (benjamin.milcic@gmail.com)
+[debug] [2023-05-06T13:14:22.800Z] [iam] checking project vocabularyinputapp for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-06T13:14:22.801Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions [none]
+[debug] [2023-05-06T13:14:22.801Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions x-goog-quota-user=projects/vocabularyinputapp
+[debug] [2023-05-06T13:14:22.801Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-06T13:14:26.907Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions 200
+[debug] [2023-05-06T13:14:26.908Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/vocabularyinputapp:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-06T13:14:26.909Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/vocabularyinputapp [none]
