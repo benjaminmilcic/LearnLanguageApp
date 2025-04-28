@@ -7,18 +7,27 @@ import { Chapter, DatabaseService, Declination } from 'src/app/shared/database.s
 @Component({
   selector: 'app-declination',
   templateUrl: './declination.component.html',
-  styleUrls: ['./declination.component.css']
+  styleUrls: ['./declination.component.css'],
 })
 export class DeclinationComponent implements OnInit {
-
   database: Chapter[] = [];
 
   declinationList: Declination[] = [];
   declination: Declination = {
-    nominativSingular: '', genitivSingular: '', dativSingular: '', akkusativSingular: '',
-    lokativSingular: '', vokativSingular: '', instrumentalSingular: '',
-    nominativPlural: '', genitivPlural: '', dativPlural: '', akkusativPlural: '',
-    lokativPlural: '', vokativPlural: '', instrumentalPlural: ''
+    nominativSingular: '',
+    genitivSingular: '',
+    dativSingular: '',
+    akkusativSingular: '',
+    lokativSingular: '',
+    vokativSingular: '',
+    instrumentalSingular: '',
+    nominativPlural: '',
+    genitivPlural: '',
+    dativPlural: '',
+    akkusativPlural: '',
+    lokativPlural: '',
+    vokativPlural: '',
+    instrumentalPlural: '',
   };
 
   options: string[] = [];
@@ -27,10 +36,10 @@ export class DeclinationComponent implements OnInit {
   language: string;
   translation: string;
 
-  playAudio = new Audio;
-  audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
+  playAudio = new Audio();
+  audioPath = 'https://www.goethe-verlag.com/sounds/_alleima/_mp3/';
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService) {}
 
   ngOnInit() {
     this.database = this.databaseService.getDatabase();
@@ -39,13 +48,15 @@ export class DeclinationComponent implements OnInit {
 
     this.filteredOptions = this.searchField.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map((value) => this._filter(value || ''))
     );
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((option) =>
+      option.toLowerCase().includes(filterValue)
+    );
   }
 
   onSubmit(wordToSearch: string) {
@@ -64,7 +75,6 @@ export class DeclinationComponent implements OnInit {
     return this.declinationList[index];
   }
 
-
   checkLanguageOfWord(): string {
     let lokativIsUndefined = this.declination.lokativSingular === undefined;
     return lokativIsUndefined ? 'german' : 'croatian';
@@ -72,12 +82,15 @@ export class DeclinationComponent implements OnInit {
 
   getTranslationOfWord(word: string): string {
     let translation = 'No translation available!';
-    this.database.map(chapter => {
-      chapter.vocables.map(vocable => {
+    this.database.map((chapter) => {
+      chapter.vocables.map((vocable) => {
         if (vocable[this.language] === word) {
-          translation = this.language === 'croatian' ? vocable['german'] : vocable['croatian'];
+          translation =
+            this.language === 'croatian'
+              ? vocable['german']
+              : vocable['croatian'];
         }
-      })
+      });
     });
     return translation;
   }
@@ -89,8 +102,8 @@ export class DeclinationComponent implements OnInit {
   onPlayAudio(word: string) {
     let wordToPlay: string;
     let audioLanguage: string;
-    this.database.map(chapter => {
-      chapter.vocables.map(vocable => {
+    this.database.map((chapter) => {
+      chapter.vocables.map((vocable) => {
         if (vocable.croatian === word) {
           audioLanguage = 'HR';
           wordToPlay = vocable.audioNr;
@@ -99,9 +112,10 @@ export class DeclinationComponent implements OnInit {
           audioLanguage = 'DE';
           wordToPlay = vocable.audioNr;
         }
-      })
+      });
     });
-    this.playAudio.src = this.audioPath + audioLanguage + '/' + wordToPlay + '.mp3';
+    this.playAudio.src =
+      this.audioPath + audioLanguage + '/' + wordToPlay + '.mp3';
     this.playAudio.play();
   }
 }

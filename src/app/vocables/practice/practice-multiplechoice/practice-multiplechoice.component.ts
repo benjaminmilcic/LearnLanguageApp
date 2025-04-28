@@ -31,9 +31,8 @@ export class PracticeMultiplechoiceComponent implements OnInit, OnDestroy {
 
   playAudio = new Audio;
   audioMode: boolean;
-  audioPath = 'https://www.goethe-verlag.com/book2/_alleima/_mp3/';
+  audioPath = 'https://www.goethe-verlag.com/sounds/_alleima/_mp3/';
   audioLanguage = 'HR';
-
   categorySelectedSubscription: Subscription;
   loadVocableListSubscription: Subscription;
 

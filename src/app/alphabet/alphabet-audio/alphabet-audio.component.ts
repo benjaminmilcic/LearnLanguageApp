@@ -12,7 +12,7 @@ export class AlphabetAudioComponent implements OnInit, OnDestroy {
 
   alphabet: Letter[] = [];
   playAudio = new Audio;
-  audioPath = 'https://www.kroatischlernen.eu/audio/alphabet/';
+  audioPath = '/assets/audio/';
 
   selectedLetterSubscription: Subscription;
   letterIndex: number;
